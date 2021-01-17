@@ -1,0 +1,229 @@
+Name: ABS    6
+The DISGCL function  ABS  returns the absolute value  of an
+expression.
+The call is: v = ABS (x)
+x            is an  expression  or the name  of a variable. 
+             x can be a scalar or an array.
+
+v            is the absolute value of x. If x is of complex
+             type, v has the value:
+                   
+                     SQRT (Real(x)**2 + Imag(x)**2)
+
+             and the type FLOAT.  For all other types, v has
+             the same type as x. 
+Name: ACOS   6
+The function  ACOS  returns the arc cosine  (inverse cosine)
+of an expression, expressed in radians in the range [0, pi].
+The call is: v = ACOS (x)
+x            is an  expression  or  the  name  of a variable
+             ( -1 <= x <= 1). x can be a scalar or an array,
+             but cannot be complex.
+
+v            is the  returned  arc cosine  of x.  If  x is a
+             scalar, v has the type  DOUBLE.  If x is an ar-
+             ray,  v has the same structure as x,  with each
+             element  containing  the arc cosine of the cor-
+             responding element of x.     
+Name: ASIN   6
+The function  ASIN returns the arc sine (inverse sine) of an
+expression, expressed in radians in the range [-pi/2, pi/2].
+The call is: v = ASIN (x)
+x            is an  expression  or  the  name  of a variable
+             ( -1 <= x <= 1). x can be a scalar or an array,
+             but cannot be complex.
+
+v            is the  returned  arc  sine  of x.  If  x  is a
+             scalar, v has the type  DOUBLE.  If x is an ar-
+             ray,  v has the same structure as x,  with each
+             element containing  the arc sine of the corres-
+             ponding element of x.     
+Name: ATAN   6
+The function  ATAN returns the arc tangent (inverse tangent)
+of an expression, expressed in radians in the range  [-pi/2,
+pi/2].
+The call is: v = ATAN (x)
+x            is an  expression  or  the  name of a variable.
+             x can  be  a scalar or an array,  but cannot be
+             complex.
+
+v            is the returned arc tangent  of x.  If  x  is a
+             scalar, v has the type  DOUBLE.  If x is an ar-
+             ray,  v has the same structure as x,  with each
+             element  containing the arc tangent of the cor-
+             responding element of x.     
+Name: ATAN2  6
+The function ATAN2 returns the arc tangent (inverse tangent)
+for pairs of expressions,  expressed in radians in the range
+[-pi, pi].
+The call is: v = ATAN2 (y, x)
+y, x         are expressions  or  the  names  of  variables.
+             x  and  y can be scalars or arrays.  They  must
+             have  the same type, but cannot be complex.
+
+v            is the returned arc tangent of y/x.  If x and y
+             are scalars, v has the type  DOUBLE. If x and y
+             are arrays, v has the same structure, with each
+             element  containing the arc tangent of the cor-
+             responding element of y/x.
+             If y and x are both zero, ATAN2 returns zero.
+Name: CEIL   6
+The function CEIL returns the smallest integer not less than
+x, as a double.
+The call is: v = CEIL (x)
+x            is an  expression  or  the  name of a variable.
+             x can  be  a scalar or an array, but must be of 
+             floating point type.
+
+v            is the smallest integer not less than x of type
+             DOUBLE.
+Name: FLOOR  6
+The function  FLOOR  returns the largest integer not greater
+than x, as a double.
+The call is: v = FLOOR (x)
+x            is an  expression  or  the  name of a variable.
+             x can  be  a scalar or an array, but must be of 
+             floating point type.
+
+v            is the largest  integer  not greater than  x of 
+             type DOUBLE.
+Name: COS   6
+The function  COS  returns the cosine of an expression,  ex-
+pressed in radians.
+The call is: v = COS (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array.
+
+v            is the  returned cosine of x. If x is a scalar,
+             v has the type  DOUBLE. If x is an array, v has
+             the same structure as x, with each element con-
+             taining the cosine of the corresponding element
+             of x.     
+Name: SIN   6
+The function  SIN  returns the  sine  of an expression,  ex-
+pressed in radians.
+The call is: v = SIN (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array.
+
+v            is the  returned  sine of x.  If x is a scalar,
+             v has the type  DOUBLE. If x is an array, v has
+             the same structure as x, with each element con-
+             taining the  sine  of the corresponding element
+             of x.     
+Name: COSH   6
+The function  COSH  returns the hyperbolic cosine  of an ex-
+pression,  expressed in radians.
+The call is: v = COSH (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array.
+
+v            is the  returned  hyperbolic cosine of x.  If x
+             is a scalar, v has the type  DOUBLE. If x is an
+             array, v has the same structure as x, with each
+             element containing the hyperbolic cosine of the
+             corresponding element of x.     
+Name: SINH   6
+The function  SINH  returns the  hyperbolic sine  of  an ex-
+pression,  expressed in radians.
+The call is: v = SINH (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array.
+
+v            is the  returned  hyperbolic  sine  of x.  If x
+             is a scalar, v has the type  DOUBLE. If x is an
+             array, v has the same structure as x, with each
+             element  containing the hyperbolic  sine of the
+             corresponding element of x.     
+Name: TAN   6
+The function  TAN  returns the tangent of an expression, ex-
+pressed in radians.
+The call is: v = TAN (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array.
+
+v            is the returned tangent of x. If x is a scalar,
+             v has the type  DOUBLE. If x is an array, v has
+             the same structure as x, with each element con-
+             taining  the tangent  of the corresponding ele-
+             ment of x.     
+Name: TANH   6
+The function  TANH returns the hyperbolic tangent  of an ex-
+pression,  expressed in radians.
+The call is: v = TANH (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array.
+
+v            is the returned  hyperbolic tangent of x.  If x
+             is a scalar, v has the type  DOUBLE. If x is an
+             array, v has the same structure as x, with each
+             element  containing  the  hyperbolic tangent of
+             the corresponding element of x.     
+Name: EXP    6
+The function EXP returns the exponential function value.
+The call is: v = EXP (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array.
+
+v            is the returned  exponential function value for
+             x. If x is a scalar, v has the type  DOUBLE. If
+             x is an array,  v has the  same structure as x,
+             with each element  containing  the  exponential 
+             function value for the corresponding element of
+             x.     
+Name: FMOD   6
+The function  FMOD  returns  the floating point remainder of 
+x/y, with the same sign as x.
+The call is: v = FMOD (x, y)
+x, y         are expressions  or  the  names  of  variables.
+             x  and  y can be scalars or arrays.  They  must
+             have  the same type, but cannot be complex.
+
+v            is the returned  floating  point  remainder  of 
+             x/y.  If x  and y  are scalars,  v has the type
+             DOUBLE. If x and y are arrays,  v has the  same
+             structure as x and y.
+             FMOD returns zero if y is zero.
+Name: LOG    6
+The function LOG returns the natural logarithm of an expres-
+sion.
+The call is: v = LOG (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array,  and may be real 
+             or complex.  In the real case,  x must be posi-
+             tive. In the complex case,  x must not be zero.
+
+v            is the returned natural logarithm of x. If x is
+             a scalar and real, v has the type DOUBLE.  If x
+             is an array,  v has  the  same  structure as x,
+             with each element  containing the natural loga- 
+             rithm of the corresponding element of x. 
+             If x is COMPLEX,  the imaginary part of  v lies
+             in the range -pi < IMAG(v) < pi.    
+Name: LOG10  6
+The function  LOG10  returns the base 10 logarithm of an ex-
+pression.
+The call is: v = LOG10 (x)
+x            is an  expression  or the  name  of a variable.
+             x can  be a scalar  or an array,  but cannot be
+             complex. x must be positive.
+
+v            is the returned base 10 logarithm of x. If x is
+             a scalar, v has the type DOUBLE. If x is an ar-
+             ray, v has  the  same structure as x, with each
+             element containing the base 10 logarithm of the
+             corresponding element of x. 
+Name: SQRT   6
+The function SQRT returns the quare root of an expression.
+The call is: v = SQRT (x)
+x            is an  expression  or the  name  of a variable.
+             x can be a scalar or an array,  and may be real 
+             or complex.  In the  real case,  x must be  non
+             negative 
+
+v            is the  returned square  root of x.  If  x is a 
+             scalar and real, v has the type DOUBLE. If x is
+             an array, v has the  same  structure as x, with
+             each element containing the square root  of the
+             corresponding element of x. 
+             If x is COMPLEX,  v has the type COMPLEX.

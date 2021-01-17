@@ -1,0 +1,243 @@
+Name: ARG     8
+The function  ARG returns the phase  of a complex expression
+z.
+The call is: v = ARG (z)
+z            is a complex expression.  z may be a  scalar or
+             an array.
+
+v            is the returned  phase of  z.  v  has  the type
+             DOUBLE.
+Name: CONJG  8
+The function  CONJG  returns the conjugate  of a complex ex-
+pression z.
+The call is: v = CONJG (z)
+z            is a complex expression.  z may be a  scalar or
+             an array.
+
+v            is the returned conjugate of z. v has  the type
+             COMPLEX.
+Name: IMAG   8
+The function  IMAG  returns the imaginary part  of a complex
+expression z.
+The call is: v = IMAG (z)
+z            is a complex expression.  z may be a  scalar or
+             an array.
+
+v            is the returned imaginary part of z. v has  the
+             type FLOAT.
+Name: CATARR 9
+The function CATARR concatenates tow arrays.
+The call is: r = CATARR (a, b)
+a, b         are arrays of the same data type.
+
+r            is the  returned array with the same  type as a
+             and b. 
+Name: MAXARR 9
+The function MAXARR returns the maximum of an array a.
+The call is: v = MAXARR (a)
+a            is an array.
+
+v            is the returned  maximum of a.  v can  have the
+             types INT and DOUBLE.
+Name: MINARR 9
+The function MINARR returns the minimum of an array a.
+The call is: v = MINARR (a)
+a            is an array.
+
+v            is the returned minimum of a.  v can  have the
+             types INT and DOUBLE.
+Name: SUBARR 9
+The function SUBARR creates a subarray from an array a.
+The call is: r = SUBARR (a, i1, n)
+a            is an array.
+
+i1           is the starting index. 
+
+n            is the number of elements  copied to the subar-
+             ray.
+
+r            is the returned  subarray with the same type as
+             a.
+Name: SUBMAT 9
+The function SUBMAT creates a submatrix from certain columns
+of a twodimensional array a.
+The call is: r = SUBMAT (a, idx)
+a            is a twodimensional array.
+
+idx          is an integer array  containing  column numbers
+             in the range [0, n-1]  where n is the number of
+             columns is a.
+
+r            is the returned twodimensional array.
+Name: TRPMAT 9
+The function TRPMAT exchanges rows  and  columns of a matrix
+a.
+The call is: r = TRPMAT (a)
+a            is a twodimensional array.
+
+r            is the returned twodimensional array.
+Name: ARGCNT 10
+The function  ARGCNT  returns the total number of parameters
+passed to a user-defined subroutine or function.
+The call is: n = ARGCNT ()
+n            is the returned number of parametes.
+Name: KEYCNT 10
+The function KEYCNT returns the number of keyword parameters
+passed to a user-defined subroutine or function. 
+The call is: n = KEYCNT ()
+n            is the returned number of keyword parametes.
+Name: VARCNT 10
+The function  VARCNT returns the number of elements of a va-
+riable v, or -1 if v is not defined.
+The call is: n = VARCNT (v)
+v            is the name of a variable.
+
+n            is the returned number of elements of v,  or -1
+             if v is not defined.
+Name: VARDEF 10
+The function  VARDEF returns 1 if the variable v is defiend. 
+The call is: n = VARDEF (v)
+v            is the name of a variable.
+
+n            is the returned status.  If v is defined, n has
+             the value 1, if v is not defined, n has the va-
+             lue 0. 
+Name: VARDIM 10
+The function VARDIM returns the n-th dimension of a variable
+v.
+The call is: ncount = VARDIM (v, n)
+v            is the name of a variable.
+
+n            defines the dimension (>= 1).
+
+ncount       is the returned number of elements  of the n-th 
+             dimension of v,  or 0 if the dimension is not
+             defined.
+
+Example:     INT A[100,50]
+             PRINT VARDIM(A,1)     prints  100
+             PRINT VARDIM(A,2)     prints   50
+             PRINT VARDIM(A,3)     prints    0
+Name: VARTYP 10
+The function VARTYP returns the data type of a variable v.
+The call is: s = VARTYP (v)
+v            is the name of a variable.
+
+s            is the returned data type  and can have the va-
+             lues 'BYTE', 'CHAR',  'SHORT', 'INT',  'FLOAT',
+             'DOUBLE', 'COMPLEX', 'STRING' and 'UNDEF'.
+             VARTYP returns 'UNDEF' if v is not defined.
+Name: DALLOC 11
+The function  DALLOC  creates a DOUBLE array and initializes
+it with {0., 1., ....., n-1.}.
+The call is: r = DALLOC (n)
+n            defines the number of elements.   n must  be an 
+             integer constant, expression or variable. 
+
+r            is the returned DOUBLE array.
+Name: FALLOC 11
+The function  FALLOC  creates a  FLOAT array and initializes
+it with {0., 1., ....., n-1.}.
+The call is: r = FLOAT (n)
+n            defines the number of elements.   n must  be an 
+             integer constant, expression or variable. 
+
+r            is the returned FLOAT array.
+Name: IALLOC 11
+The function  IALLOC creates an INT array and initializes it
+with {0, 1, ....., n-1}.
+The call is: r = IALLOC (n)
+n            defines the number of elements.   n must  be an 
+             integer constant, expression or variable. 
+
+r            is the returned INT array.
+Name: STRLEN 12
+The function STRLEN returns the length of a string.
+The call is: n = STRLEN (s)
+s            is a string constant or variable.
+
+n            is the returned length of s with the type INT.
+Name: STRLWR 12
+The function STRLWR returns a string converted to lowercase
+letters. 
+The call is: s2 = STRLWR (s1)
+s1           is a string constant or variable.
+
+s2           is the returned string containing s1 in lower-
+             case letters.
+Name: STRUPR 12
+The function STRUPR returns a string converted to uppercase
+letters. 
+The call is: s2 = STRUPR (s1)
+s1           is a string constant or variable.
+
+s2           is the returned string containing s1 in upper-
+             case letters.
+Name: STRREP 12
+The function STRREP returns n copies of a string s.
+The call is: s2 = STREP (s1, n)
+s1           is a string constant or variable.
+
+n            defines the number of copies.
+
+s2           is the returned string containing n copies of 
+             s1.
+
+Example:     PRINT STRREP ('ABCD', 2)   prints 'ABCDABCD'
+Name: STRSTR 12
+The function STRSTR returns the first occurence of string s2
+in string s1, or -1 if not present.
+The call is: n = STRSTR (s1, s2)
+s1, s2       are string constants or variables.
+n            is the returned index,  or -1 if s2 is not pre-
+             sent in s1. 
+Name: SUBSTR 12
+The function SUBSTR returns a substring of a string s1.
+The call is: s2 = SUBSTR (s1, i1, n)
+s1           is a string constant or variable.
+
+i1           is the starting index (>= 0). 
+
+n            is the number of characters  copied to the sub-
+             string.
+
+s2           is the returned substring.
+Name: TRMLEN 12
+The function  TRMLEN  returns the length of a string without
+trailing blanks. 
+The call is: n = TRMLEN (s)
+s            is a string constant or variable.
+
+n            is the  returned  length  of s without trailing
+             blanks.
+Name: GETENV 13
+The function  GETENV returns the environment string associa-
+ted with an environment s1, or blank if no string exists.
+The call is: s2 = GETENV (s1)
+s1           is a string constant or variable.
+
+s2           is the returned associated string.
+Name: SYSTEM 13
+The function SYSTEM executes a system command.
+The call is: n = SYSTEM (s)
+s            is a string constant  or variable containing a
+             system command.
+
+n            is the returned status. If SYSTEM fails, n has
+             the value -1.
+Name: CLOCK  14
+The function  CLOCK  returns  the processor time  in seconds
+used by the DISGCL session since the last call of  CLOCK. At
+the first time, CLOCK returns 0. 
+The call is: n = CLOCK ()
+n            is the returned processor time.
+Name: DATE   14
+The function  DATE  returns  a string containing the date in
+the format dd.mm.yy.
+The call is: s = DATE ()
+s            is the returned date.
+Name: TIME   14
+The function  TIME  returns  a string containing the time in
+the format hh:mm:ss.
+The call is: s = TIME ()
+s            is the returned time.

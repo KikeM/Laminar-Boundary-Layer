@@ -1,0 +1,29 @@
+ALL: lib_interpolation.a
+
+INTERPOLATION = Lagrange_Interpolation_Method.o Piecewise_Polynomial_Interpolation.o Gaussian_Quadratures.o Multivariate_Interpolation.o 
+
+# Dependencies.
+
+Lagrange_Interpolation_Method.o:	Lagrange_Interpolation_Method.f90
+Piecewise_Polynomial_Interpolation.o:	Piecewise_Polynomial_Interpolation.f90
+Gaussian_Quadratures.o:			Gaussian_Quadratures.f90
+Multivariate_Interpolation.o:		Multivariate_Interpolation.f90
+High_Order_Integration.o:               High_Order_Integration_alternative.f90
+Optimum_Grid_Methods.o:			Optimum_Grid_Methods.f90
+
+# Default compilation rules.
+
+.f.o:
+	$(FC) -c $(FFLAGS) $*.f
+
+# Rules to build library.
+
+lib_interpolation.a:  $(INTERPOLATION)
+	ar rs $@ $?
+
+clean:
+	- /bin/rm $(INTERPOLATION) lib_interpolation.a
+
+remake:
+	make clean
+	make

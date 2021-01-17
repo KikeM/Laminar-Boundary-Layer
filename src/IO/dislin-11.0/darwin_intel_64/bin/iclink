@@ -1,0 +1,114 @@
+if test $# -eq 0
+then echo ""
+echo "    /******************************************************************/"
+echo "    /**                       C L I N K                              **/"
+echo "    /**                                                              **/"
+echo "    /** CLINK links C programs using DISLIN routines.                **/"
+echo "    /**                                                              **/"
+echo "    /** Command:    clink    [option]  [-r8]     main                **/"
+echo "    /**                                                              **/"
+echo "    /** option      is an optional  parameter  that can  have one of **/"
+echo "    /**             the following values:                            **/"
+echo "    /**        -c   for compiling programs before linking            **/"
+echo "    /**        -cpp for compiling C++ programs before linking        **/"
+echo "    /**        -r   for running programs after linking               **/"
+echo "    /**        -a   for compiling, linking and running programs.     **/"
+echo "    /**                                                              **/"
+echo "    /** -r8         is an optional parameter for using the double    **/"
+echo "    /**             precision library of DISLIN.                     **/"
+echo "    /**                                                              **/"
+echo "    /** main        is the name of the main program or may be in the **/"
+echo "    /**             form   'main obj lib'   where obj is  a field of **/"
+echo "    /**             object files and lib a  field of library  files. **/"
+echo "    /**             Several files must be separated by blanks.       **/"
+echo "    /**             A file  'main'  will be created after linking.   **/"
+echo "    /**                                                              **/"
+echo "    /** Example:    clink  -a  test mylib.a                          **/"
+echo "    /** Version:    Intel C compiler icc                             **/"
+echo "    /******************************************************************/"
+  exit 0
+fi
+
+if test ! $DISLIN; then
+ DISLIN=/usr/local/dislin
+fi
+
+opt1=-x
+if test $1 = -c ; then
+  opt1=-c
+  shift
+elif test $1 = -cpp ; then
+  opt1=-cpp
+  shift
+elif test $1 = -a ; then
+  opt1=-a
+  shift
+elif test $1 = -r ; then
+  opt1=-r
+  shift
+fi
+
+if test $# -eq 0 ; then
+  echo "<<<< File is missing!"
+  exit 0
+fi
+
+opt2=-x
+if test $1 = -r8 ; then
+  shift
+  opt2=-r8
+fi
+
+if test $# -eq 0 ; then
+  echo "<<<< File is missing!"
+  exit 0
+fi
+
+name=$1
+if test $opt1 = -x || test $opt1 = -r ; then
+  if test ! -f ${name}.o ; then
+     echo " >>>> Cannot find file ${name}.o" 
+     exit 0
+  fi
+  bname=`basename ${name}`
+fi
+
+if test $opt1 = -cpp ; then
+  ext=cpp
+  comp=icc
+else
+  ext=c
+  comp=icc
+fi
+
+if test $opt1 = -c || test $opt1 = -cpp || test $opt1 = -a ; then
+  if test ! -f ${name}.$ext ; then
+     echo " >>>> Cannot find file ${name}.$ext" 
+     exit 0
+  fi
+  bname=`basename ${name}`
+fi
+
+if test $opt2 = -r8 ; then
+  libs="-L$DISLIN -ldislnc_d"
+  incpath=$DISLIN/real64
+else
+  libs="-L$DISLIN -ldislnc"
+  incpath=$DISLIN
+fi
+xlibs="-L/sw/lib -lXm"
+params="$2 $3 $4 $5 $6 $7"
+
+if test $opt1 = -c || test $opt1 = -cpp; then
+  $comp -I${incpath} ${name}.$ext -o $bname $params $libs $xlibs
+elif test $opt1 = -a ; then
+  $comp -I${incpath} ${name}.$ext -o $bname $params $libs $xlibs
+else 
+  $comp  ${name}.o -o $bname $params $libs $xlibs
+fi
+
+if test $opt1 = -a ; then
+  ./$bname
+elif test $opt1 = -r ; then
+  ./$bname
+fi

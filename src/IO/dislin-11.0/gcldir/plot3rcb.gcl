@@ -1,0 +1,108 @@
+%GCL
+subroutine plot3rcb (id, iray)
+
+extern id_file, id_lis,  id_block
+extern id_but1, id_but2, id_but3, id_but4, id_but5, id_but6, id_but7
+extern id_xcol, id_ycol, id_ucol, id_vcol, id_zcol
+extern id_xmin, id_xmax, id_xor,  id_xstp
+extern id_ymin, id_ymax, id_yor,  id_ystp
+extern id_zmin, id_zmax, id_zor,  id_zstp
+extern id_tit1, id_tit2, id_tit3, id_tit4, id_xtit, id_ytit
+
+// Parameter requesting
+cdata    = gwgfil (id_file)                // Data File
+
+idev    = gwglis (id_lis)                 // Device
+cdev    = itmstr ("XWIN|CONS|PSCL", idev)
+
+%xauto = gwgbut (id_but1)                   // Scaling (Auto, User)
+%xauto = 1 - %xauto
+%yauto = gwgbut (id_but2)                   // Scaling (Auto, User)
+%yauto = 1 - %yauto
+%zauto = gwgbut (id_but3)                   // Scaling (Auto, User)
+%zauto = 1 - %zauto
+
+%xscl = "LIN"
+ixscl = gwgbut (id_but4)                   // X-axis scaling
+if (ixscl == 1) %xscl = "LOG"
+
+%yscl = "LIN"
+iyscl = gwgbut (id_but5)                   // Y-axis scaling
+if (iyscl == 1) %yscl = "LOG"
+
+%zscl = "LIN"
+izscl = gwgbut (id_but6)                   // Z-axis scaling
+if (izscl == 1) %zscl = "LOG"
+
+cxcol   = gwgtxt (id_xcol)                 // Data Block Columns
+cycol   = gwgtxt (id_ycol)
+cucol   = gwgtxt (id_ucol) 
+cvcol   = gwgtxt (id_vcol)
+czcol   = gwgtxt (id_zcol)
+nxcol   = atonum (cxcol)
+nycol   = atonum (cycol)
+nucol   = atonum (cucol)
+nvcol   = atonum (cvcol)
+nzcol   = atonum (czcol)
+
+cblock  = gwgtxt (id_block)
+nblock  = atonum (cblock)
+
+irev    = gwgbut (id_but7)                   // Z-axis scaling
+
+cxmin   = gwgtxt (id_xmin)                 // Axis system scaling
+cxmax   = gwgtxt (id_xmax)
+cxor    = gwgtxt (id_xor) 
+cxstp   = gwgtxt (id_xstp)
+%xmin   = atonum (cxmin)
+%xmax   = atonum (cxmax)
+%xor    = atonum (cxor)
+%xstep  = atonum (cxstp)
+if (%xstep == 0.) free %xor, %xstep
+
+cymin   = gwgtxt (id_ymin)
+cymax   = gwgtxt (id_ymax)
+cyor    = gwgtxt (id_yor) 
+cystp   = gwgtxt (id_ystp)
+%ymin   = atonum (cymin)
+%ymax   = atonum (cymax)
+%yor    = atonum (cyor)
+%ystep  = atonum (cystp)
+if (%ystep == 0.) free %yor, %ystep
+
+czmin   = gwgtxt (id_zmin)
+czmax   = gwgtxt (id_zmax)
+czor    = gwgtxt (id_zor) 
+czstp   = gwgtxt (id_zstp)
+%zmin   = atonum (czmin)
+%zmax   = atonum (czmax)
+%zor    = atonum (czor)
+%zstep  = atonum (czstp)
+if (%zstep == 0.) free %zor, %zstep
+
+%t1     = gwgtxt (id_tit1)                 // Title
+%t2     = gwgtxt (id_tit2)
+%t3     = gwgtxt (id_tit3)
+%t4     = gwgtxt (id_tit4)
+
+%x      = gwgtxt (id_xtit)                 // Axis titles
+%y      = gwgtxt (id_ytit)
+
+if (datfil (cdata)  == -1) return 
+if (datblk (nblock) == -1) return
+
+xray = datray (nxcol)
+yray = datray (nycol)
+uray = datray (nucol)
+vray = datray (nvcol)
+zray = datray (nzcol)
+
+metafl (cdev)
+if (irev == 1) scrmod ("reverse")
+if (irev == 0) scrmod ("erase")
+
+plot3r xray, yray, uray, vray, zray
+if (idev == 1 || idev == 2) unit(0)
+winmod ("none")
+disfin ()
+end

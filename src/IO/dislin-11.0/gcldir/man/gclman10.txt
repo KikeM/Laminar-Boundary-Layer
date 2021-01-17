@@ -1,0 +1,413 @@
+              Appendix A: Intrinsic Functions 
+           --------------------------------------
+
+This appendix is a summary of the DISGCL intrinsic functi-
+ons. 
+
+A.1 Mathematical Functions
+
+ -----------------------------------------------------------
+ |  Function  |                  Meaning                   |
+ -----------------------------------------------------------
+ |  ABS (x)   |  absolute value |x|.                       |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  ACOS (x)  |  cos(x)^-1 in the range [0, pi],           |
+ |            |                             -1 <= x <= 1.  |
+ -----------------------------------------------------------
+ |  ASIN (x)  |  sin(x)^-1 in the range [0, pi],           |
+ |            |                             -1 <= x <= 1.  |
+ -----------------------------------------------------------
+ |  ATAN (x)  |  tan(x)^-1 in the range [-pi/2, pi/2].     |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  ATAN2(y,x)|  tan(y/x)^-1 in the range [-pi, pi].       |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  CEIL (x)  |  smallest integer not less than x, as a    |
+ |            |  double.                                   |
+ -----------------------------------------------------------
+ |  COS (x)   |  cosine of x.                              |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  COSH (x)  |  hyperbolic cosine of x.                   |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  EXP (x)   |  exponential function e^x                  |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  FLOOR (x) |  largest integer not greater than x, as a  |
+ |            |  double.                                   |
+ -----------------------------------------------------------
+ |  FMOD(x,y) |  floating point remainder o fx/y, with the |
+ |            |  sign as x. FMOD returns zero if y is zero.|
+ -----------------------------------------------------------
+ |  LOG (x)   |  natural logarithm ln(x), x > 0.           |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  LOG10 (x) |  base 10 logarithm, x > 0.                 |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  SIN (x)   |  sine of x.                                |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  SINH (x)  |  hyperbolic sine of x.                     |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  SQRT (x)  |  square root of x, x >= 0.                 |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  TAN (x)   |  tangent of x.                             |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  TANH (x)  |  hyperbolic tangent of x.                  |
+ |            |                                            |
+ -----------------------------------------------------------
+              Figure A.1: Mathematical Functions
+
+Note:
+
+ - Normally,  the parameter x in a mathematical function can
+   be a scalar  or an array  expression,  and may be real or
+   complex. If x is a scalar expression,  the returned value
+   of a  mathematical function has the type  DOUBLE  or COM-
+   PLEX. If x is an array expression of types  FLOAT, DOUBLE
+   or COMPLEX, the returned value is also a FLOAT, DOUBLE or
+   COMPLEX array.  If x is an array expression  of type INT,
+   the returned value is a FLOAT array.
+
+A.2 Type Conversion Functions
+
+ -----------------------------------------------------------
+ |  Function     |                Meaning                  |
+ -----------------------------------------------------------
+ | ATONUM (s)    | converts a string to a number.          |
+ |               |                                         |
+ -----------------------------------------------------------
+ | BYTE (x)      | converts x to BYTE.                     |
+ |               |                                         |
+ -----------------------------------------------------------
+ | CHAR (n)      | converts x to CHAR.                     |
+ |               |                                         |
+ -----------------------------------------------------------
+ | COMPLEX (x,y) | converts to COMPLEX. x is converted to  |
+ |               | the real, y is converted to the imagi-  |
+ |               | nary part.                              |
+ -----------------------------------------------------------
+ | DOUBLE (x)    | converts x to DOUBLE.                   |
+ |               |                                         |
+ -----------------------------------------------------------
+ | FLOAT (x)     | converts x to FLOAT. If x is a complex  |
+ |               | number, FLOAT returns the real part of  |
+ |               | x.                                      |
+ -----------------------------------------------------------
+ | INT (x)       | converts x to INT.                      |
+ |               |                                         |
+ -----------------------------------------------------------
+ | NUMTOA (x,    | converts a number to a string.          |
+ |         ndig) |                                         |
+ -----------------------------------------------------------
+ | SHORT (x)     | converts x to SHORT.                    |
+ |               |                                         |
+ -----------------------------------------------------------
+ | STRING (x)    | converts x to STRING.                   |
+ |               |                                         |
+ -----------------------------------------------------------
+            Figure A.2: Type Conversion Functions
+
+A.3 Complex Functions
+
+ -----------------------------------------------------------
+ |  Function  |                  Meaning                   |
+ -----------------------------------------------------------
+ |  ARG (z)   |  returns the phase of z in radians.        |
+ |            |                                            |
+ -----------------------------------------------------------
+ |  CONJG (z) |  returns the conjugate of the complex      |
+ |            |  value z.                                  |
+ -----------------------------------------------------------
+ |  IMAG (z)  |  returns the imaginary part of z.          |
+ |            |                                            |
+ -----------------------------------------------------------
+            Figure A.3: Complex Functions
+
+A.4 Array Functions
+
+ -----------------------------------------------------------
+ |  Function       |               Meaning                 |
+ -----------------------------------------------------------
+ | CATARR (a, b)   | concatenates two arrays.              |
+ |                 |                                       |
+ -----------------------------------------------------------
+ | MAXARR (a)      | returns the maximum of an array a.    |
+ |                 |                                       |
+ -----------------------------------------------------------
+ | MINARR (a)      | returns the minimum of an array a.    |
+ |                 |                                       |
+ -----------------------------------------------------------
+ | SUBARR (a, i1,  | creates a subarry from the array a.   | 
+ |             n)  | i1 is the first index, n the number   |
+ |                 | of elements of a.                     |  
+ -----------------------------------------------------------
+ | SUBMAT (a, idx) | creates a submatrix from certain col- |
+ |                 | umns of the two-dimensional array a.  |
+ |                 | idx is an integer array containing    |
+ |                 | column numbers in the range 0 to n-1  |
+ |                 | where n is the number of columns in a.|
+ -----------------------------------------------------------
+ | TRPMAT (a)      | exchanges rows and columns of a       |
+ |                 | matrix a.                             |
+ -----------------------------------------------------------
+               Figure A.4: Array Functions
+
+A.5 Variable and Parameter Functions
+
+ -----------------------------------------------------------
+ |  Function  |                  Meaning                   |
+ -----------------------------------------------------------
+ | ARGCNT ()  | returns the total number of parameters     |
+ |            | passed to a user-defined subroutine or     |
+ |            | function.                                  |
+ -----------------------------------------------------------
+ | KEYCNT ()  | returns the number of keyword parameters   |
+ |            | passed to a user-defined subroutine or     |
+ |            | function.                                  |
+ -----------------------------------------------------------
+ | VARCNT (v) | returns the number of elements of a vari-  |
+ |            | able v, or -1 if v is not defined.         |
+ -----------------------------------------------------------
+ | VARDEF (v) | returns 1 if the variable v is defined,    |
+ |            | and 0 if v is not defined.                 |
+ -----------------------------------------------------------
+ | VARDIM (v, | returns the n-th dimension of a variable v.|
+ |         n) | If the dimension is not defined, VARDIM    |
+ |            | returns zero.                              |
+ -----------------------------------------------------------
+ | VARTYP (v) | returns the data type of the variable v,   |
+ |            | or the string 'UNDEF' if v is not defined. |
+ |            | The returned type can have the value       |
+ |            | 'BYTE', 'INT', 'FLOAT' or 'DOUBLE'.        |
+ -----------------------------------------------------------
+          Figure A.5: Variable and Parameter Functions
+
+A.6 Data File Functions
+
+ -----------------------------------------------------------
+ |  Function       |              Meaning                  |
+ -----------------------------------------------------------
+ | DATBLK (n)      | defines the current data block. It    |
+ |                 | returnes -1 if the data block n is    |
+ |                 | not defined.                          |
+ -----------------------------------------------------------
+ | DATCNT (copt)   | returns the number of data in the     |
+ |                 | current data block. copt can have the |
+ |                 | values 'ROWS', 'COLUMNS', 'FULL' and  |
+ |                 | 'BLOCKS'.                             |
+ -----------------------------------------------------------
+ | DATFIL (s)      | defines the data file. It returns -1  |
+ |                 | if it fails.                          |
+ -----------------------------------------------------------
+ | DATHDR ()       | prints the header of the current data |
+ |                 | file on the screen. DATHDR returns -1 |
+ |                 | if it fails.                          |
+ -----------------------------------------------------------
+ | DATMAT ()       | returns an array containing the whole |
+ |                 | current data block.                   |
+ -----------------------------------------------------------
+ | DATRAY (ncolumn)| returns an array containing a column  |
+ |                 | of the current data block.            |
+ -----------------------------------------------------------
+ | DATVAR (cname)  | returns the value of a variable de-   |
+ |                 | fined in the header of a data file.   |
+ -----------------------------------------------------------
+              Figure A.6: Data File Functions
+
+A.7 Memory Allocating Functions
+
+ -----------------------------------------------------------
+ |  Function  |                  Meaning                   |
+ -----------------------------------------------------------
+ | DALLOC (n) | creates a double array and initializes     |
+ |            | it with {0., 1., ....., n-1.}.             |
+ -----------------------------------------------------------
+ | FALLOC (n) | creates a floating point array and initi-  |
+ |            | alizes it with {0., 1., ....., n-1.}.      |
+ -----------------------------------------------------------
+ | IALLOC (n) | creates an integer array and initializes   |
+ |            | it with {0, 1, ....., n-1}.                |
+ -----------------------------------------------------------
+          Figure A.7: Memory Allocating Functions
+
+A.8 String Functions
+
+ -----------------------------------------------------------
+ |  Function    |                  Meaning                 |
+ -----------------------------------------------------------
+ | STRLEN (s)   | returns the length of a string.          |
+ |              |                                          |
+ -----------------------------------------------------------
+ | STRLWR (s)   | returns a string converted to lowercase  |
+ |              | letters.                                 | 
+ -----------------------------------------------------------
+ | STRREP (s, n)| retuns n copies of the string s.         |
+ |              |                                          |
+ -----------------------------------------------------------
+ | STRSTR       | returns the first occurence of string s2 |
+ |     (s1, s2) | in string s1, or -1 if not present.      |
+ -----------------------------------------------------------
+ | STRUPR (s)   | returns a string converted to uppercase  |
+ |              | letters.                                 |
+ -----------------------------------------------------------
+ | SUBSTR (s,   | returns a substring of s where i1 is the |
+ |       i1, n) | starting index  and n the number of cha- |
+ |              | racters of s.                            |
+ -----------------------------------------------------------
+ | TRMLEN (s)   | returns the length of a string without   | 
+ |              | trailing blanks.                         |
+ -----------------------------------------------------------
+               Figure A.8: String Functions
+
+A.9 File Functions
+
+ -----------------------------------------------------------
+ |  Function      |                  Meaning               |
+ -----------------------------------------------------------
+ | FCLOSE (nu)    | close the file with the unit nu.       |
+ |                | It returns -1 on error.                |
+ -----------------------------------------------------------
+ | FFLUSH (nu)    | flushes any output buffers.            |
+ |                |                                        |
+ -----------------------------------------------------------
+ | FOPEN (cfil,   | opens a file and returns a file unit,  |
+ |         cmode) | or -1 if the open fails.               |
+ -----------------------------------------------------------
+ | FSEEK (nu,     | sets the current file position.        |
+ |         npos)  | It returns -1 on error.                |
+ -----------------------------------------------------------
+ | FTELL (nu)     | returns the current file position,     |
+ |                | or -1 on error.                        |
+ -----------------------------------------------------------
+ | REMOVE (cfil)  | deletes a file. It returns -1 if the   |
+ |                | attempt fails.                         |
+ -----------------------------------------------------------
+ | RENAME (cold,  | changes the name of a file. It returns |
+ |          cnew) | -1 if the attempt fails.               |
+ -----------------------------------------------------------
+ | REWIND (nu)    | rewinds the file with the unit nu.     |
+ |                | It returns -1 if any erros occured.    |
+ -----------------------------------------------------------
+                Figure A.9: File Functions
+
+A.10 Input and Output Functions
+
+ -----------------------------------------------------------
+ |  Function      |                 Meaning                |
+ -----------------------------------------------------------
+ | FGETC (nu)     | returns the next character from a file.|
+ |                | FGETC  returns -1 if end of file or    |
+ |                | error occurs.                          |
+ -----------------------------------------------------------
+ | FGETS (cbuf,   | reads at most n-1 characters into the  |
+ |         n, nu) | array cbuf,  stopping if a newline is  |
+ |                | encountered; The newline is not inclu- |
+ |                | ded in the array.  FGETS returns -1 if |
+ |                | end of file or error occurs.           |
+ -----------------------------------------------------------
+ | FPRINTF (nu,   | writes formatted output to a file con- |
+ |      s, vlist) | nected to the unit nu.                 |
+ -----------------------------------------------------------
+ | FPUTC (i, nu)  | writes the character with the ASCII    |
+ |                | value i to a file. FPUTC returns 0 if  |
+ |                | successfull or -1 if an error occurs.  |
+ -----------------------------------------------------------
+ | FPUTS (cbuf,   | writes the string cbuf to a file.      |
+ |            nu) | A newline is included in the file af-  |
+ |                | ter cbuf. FPUTS returns -1 if an error |
+ |                | occurs.                                |
+ -----------------------------------------------------------
+ | FREAD (a, n,   | reads from a file n elements into the  |
+ |            nu) | array a. FREAD returns the number of   |
+ |                | elements read, or -1 if an error oc-   |
+ |                | curs.                                  |
+ -----------------------------------------------------------
+ | FSCANF (nu, s, | reads formatted input from a file con- |
+ |         vlist) | nected to the unit nu.                 |
+ -----------------------------------------------------------
+ | FWRITE (a, n,  | writes from the array a n elements to  |
+ |            nu) | the file with the unit nu. FWRITE re-  |
+ |                | turns the number of elements written,  |
+ |                | or -1 if an error occurs.              |
+ -----------------------------------------------------------
+ | GETS (cbuf, n) | reads at most n-1 characters from the  |
+ |                | console into the array cbuf, stopping  |
+ |                | if a return is given.                  | 
+ |                | GETS returns -1 if an error occurs.    |
+ -----------------------------------------------------------
+ | PUTS (cbuf)    | prints the string cbuf on the screen.  |
+ |                | A newline is printed after the string. |
+ |                | PUTS returns -1 if an error occurs.    |
+ -----------------------------------------------------------
+ | PRINTF (s ,    | writes formatted output to the termi-  |
+ |         vlist) | nal.                                   |
+ -----------------------------------------------------------
+ | SCANF (s,      | reads formatted input from the con-    |
+ |         vlist) | sole.                                  |
+ -----------------------------------------------------------
+ | SPRINTF (cr,   | writes formatted output to a character |
+ |      s, vlist) | array.                                 |
+ -----------------------------------------------------------
+ | SSCANF (s1,    | reads formatted input from a string.   |
+ |     s2, vlist) |                                        |
+ -----------------------------------------------------------
+             Figure A.10: Input/Output Functions
+
+A.11 System Functions
+
+ -----------------------------------------------------------
+ |  Function     |               Meaning                   |
+ -----------------------------------------------------------
+ | GETENV (cenv) | returns the environment string associa- |
+ |               | ted with cenv, or blank if no string    |
+ |               | exists.                                 |
+ -----------------------------------------------------------
+ | GETPID ()     | returns the process ID of the DISGCL    |
+ |               | executable.                             |                 
+ -----------------------------------------------------------
+ | SYSTEM (cmd)  | executes the system command cmd where   |
+ |               | cmd is a character variable. SYSTEM     |
+ |               | returns -1 if it fails.                 |
+ -----------------------------------------------------------
+               Figure A.11: System Functions
+
+A.12 Time Functions
+
+ -----------------------------------------------------------
+ |  Function |                Meaning                      |
+ -----------------------------------------------------------
+ | CLOCK ()  | returns the processor time in seconds used  |
+ |           | by the GCL session since the last call of   |
+ |           | CLOCK. At the first time, CLOCK returns 0.  |
+ -----------------------------------------------------------
+ | DATE  ()  | returns a string containing the date in the |
+ |           | format dd.mm.yy                             |
+ -----------------------------------------------------------
+ | TIME  ()  | returns a string containing the time in the |
+ |           | format hh:mm:ss.                            |
+ -----------------------------------------------------------
+                 Figure A.12: Time Functions
+
+A.13 Random Number Functions
+
+ -----------------------------------------------------------
+ |  Function |                Meaning                      |
+ -----------------------------------------------------------
+ | RAND ()   | returns a random number in the range from 0 |
+ |           | to 1.                                       |
+ -----------------------------------------------------------
+ | SRAND     | sets the seed for rand. It resets the  ran- |
+ |   (iseed) | dom-number generator to a random starting   |
+ |           | point. The generator is initially seeded    |
+ |           | with a value of 1.                          |
+ -----------------------------------------------------------
+             Figure A.13: Random Number Functions
+

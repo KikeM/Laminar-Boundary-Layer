@@ -1,0 +1,6 @@
+#!/bin/sh
+if test $# -eq 0 ; then
+  disimg_w 
+else
+  disimg_x "$@"
+fi

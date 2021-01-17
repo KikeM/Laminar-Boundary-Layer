@@ -1,0 +1,27 @@
+ALL: lib_algebra.a
+
+ALGEBRA = Dense_Linear_Algebra.o Nonlinear_Algebra.o Sparse_Linear_Algebra.o Linear_Algebra.o
+
+# Dependencies.
+
+Dense_Linear_Algebra.o:		Dense_Linear_Algebra.f90
+Nonlinear_Algebra.o:		Nonlinear_Algebra.f90	
+Sparse_Linear_Algebra.o:	Sparse_Linear_Algebra.f90
+Linear_Algebra.o:		Linear_Algebra.f90
+
+# Default compilation rules.
+
+.f.o:
+	$(FC) -c $(FFLAGS) $*.f
+
+# Rules to build library.
+
+lib_algebra.a:  $(ALGEBRA)
+	ar rs $@ $?
+
+clean:
+	- /bin/rm $(ALGEBRA) lib_algebra.a
+
+remake:
+	make clean
+	make

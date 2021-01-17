@@ -1,0 +1,80 @@
+%GCL
+// Bar Graphs
+
+N     = 9
+XRAY  = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0}
+YRAY1 = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0}
+YRAY2 = { 1.0, 1.5, 2.5, 1.3, 2.0, 1.2, 0.7, 1.4, 1.1}
+YRAY3 = { 2.0, 2.7, 3.5, 2.1, 3.2, 1.9, 2.0, 2.3, 1.8}
+YRAY4 = { 4.0, 3.5, 4.5, 3.7, 4.0, 2.9, 3.0, 3.2, 2.6}
+
+SETPAG ('DA4P')
+METAFL ('CONS')
+DISINI ()
+PAGERA ()
+COMPLX ()
+
+TICKS  (1, 'X')
+INTAX  ()
+AXSLEN (1600, 700)
+TITLIN ('Bar Graphs', 3)
+
+LEGINI (CBUF, 3, 8)
+LEGLIN (CBUF, 'FIRST' , 1)
+LEGLIN (CBUF, 'SECOND', 2)
+LEGLIN (CBUF, 'THIRD' , 3)
+LEGTIT (' ')
+
+SHDPAT (5)
+AXSPOS (300, 2700) 
+GRAF   (0.,10.,0.,1.,0.,5.,0.,1.)
+
+BARGRP (3, 0.15)
+COLOR  ('RED')
+BARS   (XRAY, YRAY1, YRAY2, N)
+
+COLOR  ('GREEN')
+BARS   (XRAY, YRAY1, YRAY3, N)
+
+COLOR  ('BLUE')
+BARS   (XRAY, YRAY1, YRAY4, N)
+
+COLOR  ('FORE')
+RESET  ('BARGRP')
+LEGEND (CBUF, 7)
+ENDGRF ()
+
+LABELS('NONE','X')
+AXSPOS (300, 1900) 
+GRAF   (0.,10.,0.,1.,0.,5.,0.,1.)
+HEIGHT (30)
+LABELS ('DELTA',  'BARS')
+LABPOS ('CENTER', 'BARS')
+COLOR  ('RED')
+BARS   (XRAY, YRAY1, YRAY2, N)
+
+COLOR  ('GREEN')
+BARS   (XRAY, YRAY2, YRAY3, N)
+
+COLOR  ('BLUE')
+BARS   (XRAY, YRAY3, YRAY4, N)
+
+COLOR  ('FORE')
+HEIGHT (36)
+LEGEND (CBUF, 7)
+ENDGRF ()
+
+AXSPOS (300, 1100) 
+GRAF   (0.,10.,0.,1.,0.,5.,0.,1.)
+LABELS ('SECOND', 'BARS')
+LABPOS ('OUTSIDE', 'BARS')
+COLOR  ('RED')
+
+BARS   (XRAY, YRAY1, YRAY2, N)
+
+COLOR  ('FORE')
+HEIGHT (50)
+TITLE  ()
+ENDGRF ()
+
+DISFIN ()

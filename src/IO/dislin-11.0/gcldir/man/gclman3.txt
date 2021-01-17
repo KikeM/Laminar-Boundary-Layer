@@ -1,0 +1,190 @@
+           Chapter 3: Expressions and Operators 
+      ---------------------------------------------
+
+An expression  is an combination  of operands and operators.
+The operands can be constants,  variables and functions, and
+may be scalars or arrays. The operators are displayed in the
+following paragraph. 
+
+3.1 Operators
+
+Figure 3.1  shows all  DISGCL  operators  and summarizes the
+rules for precedence and associativity of operators.
+
+ -----------------------------------------------------------
+ | Pri. | Operator |        Meaning        | Associativity |
+ -----------------------------------------------------------
+ |  1   |    **    |     Exponentiation    | Right to left |
+ |      |          |                       |               |
+ -----------------------------------------------------------
+ |  2   |    -     |     Unary  minus      | Right to left |
+ |      |    +     |     Unary  plus       | Right to left |
+ |      |    !     |     Logical NOT       | Right to left |    
+ |      |          |                       |               |
+ -----------------------------------------------------------
+ |  3   |    *     |     Multiplication    | Left to right |
+ |      |    /     |     Division          | Left to right |
+ |      |    %     |     Modulus           | Left to right |
+ |      |          |                       |               |
+ -----------------------------------------------------------
+ |  4   |    +     |     Addition          | Left to right |
+ |      |    -     |     Subtraction       | Left to right |
+ |      |          |                       |               |
+ -----------------------------------------------------------
+ |  5   |    <     |     Less than         | Left to right |
+ |      |    <=    | Less than or equal    | Left to right |
+ |      |    >     |    Greater than       | Left to right |
+ |      |    >=    | Greater than or equal | Left to right |
+ |      |    ==    |     Equal             | Left to right |
+ |      |    !=    |     Not equal         | Left to tight |
+ |      |          |                       |               |
+ -----------------------------------------------------------
+ |  6   |    &&    |     Logical AND       | Left to right |
+ |      |    ||    |     Logical OR        | Left to right |
+ |      |          |                       |               |
+ -----------------------------------------------------------
+                 Figure 3.1: Operators
+
+The first column  in figure  3.1 gives  the precedence of an
+operator.  This means that when two operators have different
+precedence,  the operator with the higher precedence is eva-
+luated first. The highest precedence is 1.
+
+When two operators have the same precedence, they are evalu-
+ated in the direction specified in the last column  'Associ-
+ativity'.
+
+The order of normal  precedence can be changed  by enclosing
+expressions in parenthesis.
+
+Examples:
+
+  3 * 2 + 1     has the value 7 since the operator '*' has a
+                higher precedence than the operator '+'.
+  2 * 3 / 2     has the value 3 since '*' and '/' are evalu-
+                ated from left to right.
+  2 ** 2 ** 3   has the value  256 since  '**'  is evaluated
+                from right to left.
+
+3.2 Array Operations
+
+In DISGCL,  the operands in an expression can be scalars and
+arrays. Figure 3.2 shows the allowed array operations:
+
+          ---------------------------------------------
+          |       Operation     |        Value        |
+          ---------------------------------------------
+          |    array  +  array  |        array        |
+          |    array  -  array  |        array        |
+          |    array  /  array  |        array        |
+          |    array  *  array  |        array        |
+          |    array  ** array  |        array        |
+          ---------------------------------------------
+          |    array  +  scalar |        array        |
+          |    scalar +  array  |        array        |
+          ---------------------------------------------
+          |    array  -  scalar |        array        |
+          |    scalar -  array  |        array        |
+          ---------------------------------------------
+          |    array  /  scalar |        array        |
+          |    scalar /  array  |        array        |
+          ---------------------------------------------
+          |    array  *  scalar |        array        |
+          |    scalar *  array  |        array        |
+          ---------------------------------------------
+          |    array  ** scalar |        array        |
+          |    scalar ** array  |        array        |
+          ---------------------------------------------
+                  Figure 3.2: Array Operations
+
+3.3 Type Conversions
+
+When an operator  has operands of different types,  they are
+converted to a common type.  Figure 3.3 shows  the rules for
+type conversions  if both operands  are scalars  or both are 
+arrays:
+
+   -------------------------------------------------------
+   |        | BYTE   | SHORT  |  INT   | FLOAT  | DOUBLE | 
+   -------------------------------------------------------
+   | BYTE   | BYTE   | SHORT  |  INT   | FLOAT  | DOUBLE | 
+   | SHORT  | SHORT  | SHORT  |  INT   | FLOAT  | DOUBLE |
+   | INT    |  INT   |  INT   |  INT   | FLOAT  | DOUBLE |
+   | FLOAT  | FLOAT  |  INT   | FLOAT  | FLOAT  | DOUBLE |
+   | DOUBLE | DOUBLE | FLOAT  | DOUBLE | DOUBLE | DOUBLE |
+   -------------------------------------------------------
+                 Figure 3.3: Type Conversions
+
+Notes:
+
+ - A '*' means that this operation is not allowed. A warning 
+   will be displayed by DISGCL  if this operation appears in
+   an expression.
+ - The only  allowed  operator  between  strings is the plus
+   operator which concatenates two strings. 
+
+When one operand is a scalar and the other operand an array,
+the value of the expression is also an array.  The following
+figure shows the rules  for type conversions  between arrays
+and scalars:
+
+   --------------------------------------------------------
+   |Scalar/Array | BYTE | SHORT  |  INT  | FLOAT | DOUBLE | 
+   --------------------------------------------------------
+   |   BYTE      | BYTE | SHORT  |  INT  | FLOAT | DOUBLE | 
+   |   SHORT     | BYTE | SHORT  |  INT  | FLOAT | DOUBLE |
+   |   INT       | BYTE | SHORT  |  INT  | FLOAT | DOUBLE |
+   |   FLOAT     |  *   |   *    | FLOAT | FLOAT | DOUBLE |
+   |   DOUBLE    |  *   |   *    | FLOAT | FLOAT | DOUBLE |
+   --------------------------------------------------------
+    Figure 3.4: Type Conversions between Arrays and Scalars
+
+Notes:
+
+ - A '*' means that this operation is not allowed. A warning
+   will be displayed by DISGCL  if this operation appears in
+   an expression.
+
+3.4 Type Conversion Functions
+
+DISGCL provides a set of functions that convert types of va-
+riables. The conversion functions are as follows:
+
+   --------------------------------------------------------- 
+   | Function      |             Meaning                   |
+   --------------------------------------------------------- 
+   | BYTE (x)      | converts x to BYTE.                   |     
+   | CHAR (x)      | converts x to BYTE.                   |     
+   | SHORT (x)     | converts x to INT.                    |
+   | INT (x)       | converts x to INT.                    |
+   | FLOAT (x)     | converts x to FLOAT. If x is complex, |
+   |               | FLOAT returns the real part of x.     |
+   | DOUBLE (x)    | converts x to DOUBLE.                 |
+   | COMPLEX (x,y) | converts to COMPLEX. x is converted   |
+   |               | to the real, y to the imaginary part. |
+   |               | The second parameter y is optional.   |
+   | STRING (x)    | converts x to STRING.                 |
+   --------------------------------------------------------- 
+            Figure 3.5: Type Conversion Functions
+
+Examples:
+
+ ----------------------------------------------------------- 
+ | Example            |            Meaning                 |
+ ----------------------------------------------------------- 
+ | INT A[100]         |                                    |
+ | A = FLOAT (A)      | converts A to a floating point ar- |
+ |                    | ray.                               |
+ ----------------------------------------------------------- 
+ | Z = COMPLEX (3, 4) | creates the complex number Z with  |
+ |                    | the real part 3 and the imaginary  |
+ |                    | part 4.                            |
+ | Z = COMPLEX (3)    | creates the complex number Z with  |
+ |                    | the real part 3 and the imaginary  |
+ |                    | part 0.                            |
+ ----------------------------------------------------------- 
+ | IR = {65,66,67,68} |                                    |
+ | S  = STRING (IR)   | creates the string S = 'ABCD'.     |
+ ----------------------------------------------------------- 
+              Figure 3.6: Type Conversion Examples
+

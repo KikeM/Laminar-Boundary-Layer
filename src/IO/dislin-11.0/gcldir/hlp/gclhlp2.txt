@@ -1,0 +1,201 @@
+Name: EXIT    2
+The command EXIT terminates a DISGCL session.
+The call is:  EXIT
+Name: HELP    2
+The HELP command activates a menu for getting help.
+The call is:  HELP
+Name: INCLUDE 2
+A DISGCL file  can be included into another GCL file or DIS-
+GCL session with the statement
+
+INCLUDE 'file[.gcl]'
+
+Notes:
+
+ - Up to 8 include files can be nested.
+ - DISGCL  searches  the current  working directory  for the
+   filename. If the search fails, DISGCL searches the direc-
+   tory defined by the environment variable GCL_PATH.
+Name: LIST   2
+The command LIST list all defined variables.
+The call is: LIST  [option]  [v1, v2, ..., vn]
+option       can have the values  -s  and -u. If -s is used,
+             only  system  variables  are listed,  if  -u is
+             used, only user-defined variables are listed.
+v1, v2, ..,  are the names of variables. If no variables are
+         vn  specified, all defined variables are listed.
+Name: FREE   2
+The command  FREE  deallocates the space allocated by arrays
+and strings.
+The call is:    FREE v1, v2, ..., vn
+v1, v2, .., vn  are the names of variables.
+Name: PRINT  2
+The command  PRINT  prints the value of an expression on the
+screen.
+The call is:      PRINT expr1, expr2, ..., exprn
+expr1, expr2, .., exprn   are expressions.
+Name: PRINTL 2
+The command  PRINTL prints the values of expressions  on the
+screen where the values  are printed into one line separated
+by a blank.
+The call is:      PRINTL expr1, expr2, ..., exprn
+expr1, expr2, .., exprn   are expressions.
+Name: LOGON  2
+The command  LOGON defines a file where interactive commands
+will be logged.
+The call is:  LOGON cfil
+cfil          is a string containing a filename.
+
+Notes:
+
+ - Logging can be terminated with the command LOGOFF.
+ - A log file  can be executed  with the DISGCL command,  or
+   can be  included  into a DISGCL session  with the INCLUDE
+   statement.
+ - If the file cfil already exists,  a new file version will 
+   be created.
+Name: FLOAT   2
+The command FLOAT creates floating point arrays and  initia-
+lizes them with zeros.
+The call is: FLOAT list
+list         is a list  of arrays  with dimension specifica-
+             tions separated by commas.
+
+Example:     FLOAT A[10], B[5,10]   creates an array  A with
+             10 elements  and a matrix B  with 5 rows and 10
+             columns.
+Name: FLOAT  7
+The function  FLOAT  converts an expression to  FLOAT or re-
+turns the real part of a complex number.
+The call is: v = FLOAT (x)
+x            is a constant,  an expression  or the name of a
+             variable. x may be a scalar or an array.
+
+v            is the returned  FLOAT  value of x.  If x over-
+             flows the range of FLOAT data types,  a warning
+             is printed and the value zero is returned.
+Name: BYTE   2
+The command  BYTE  creates BYTE arrays  and initializes them
+with zeros.
+The call is: BYTE list
+list         is a list  of arrays  with dimension specifica-
+             tions separated by commas.
+Name: BYTE   7
+The function BYTE converts an expression to BYTE.
+The call is: v = BYTE (x)
+x            is a constant,  an expression  or the name of a
+             variable. x may be a scalar or an array.
+
+v            is the returned BYTE value of x. If x overflows
+             the range [0, 255],  a warning  is printed  and
+             the value zero is returned.
+Name: CHAR   2
+The command  CHAR  creates CHAR arrays  and initializes them
+with zeros.
+The call is: CHAR list
+list         is a list  of arrays  with dimension specifica-
+             tions separated by commas.
+Name: CHAR   7
+The function CHAR converts an expression to CHAR.
+The call is: v = CHAR (x)
+x            is a constant,  an expression  or the name of a
+             variable. x may be a scalar or an array.
+
+v            is the returned CHAR value of x. If x overflows
+             the range of  CHAR  data types,  a  warning  is
+             printed and the value zero is returned.
+Name: SHORT  2
+The command SHORT creates SHORT arrays  and initializes them
+with zeros.
+The call is: SHORT list
+list         is a list  of arrays  with dimension specifica-
+             tions separated by commas.
+Name: SHORT  7
+The function SHORT converts an expression to SHORT.
+The call is: v = SHORT (x)
+x            is a constant,  an expression  or the name of a
+             variable. x may be a scalar or an array.
+
+v            is the returned  SHORT  value of x.  If x over-
+             flows the range of SHORT data types,  a warning
+             is printed and the value zero is returned.
+Name: INT    2
+The command INT creates integer arrays  and initializes them
+with zeros.
+The call is: INT list
+list         is a list  of arrays  with dimension specifica-
+             tions separated by commas.
+Example:     INT A[10], B[5,10]  creates an integer array  A
+             with 10 elements  and an integer  matrix B with
+             5 rows and 10 columns.
+Name: INT    7
+The function INT converts an expression to INT.
+The call is: v = INT (x)
+x            is a constant,  an expression  or the name of a
+             variable. x may be a scalar or an array.
+
+v            is the returned  INT value of x. If x overflows
+             the range of INT data types, a warning is prin-
+             ted and the value zero is returned.
+Name: DOUBLE 2
+The command  DOUBLE  creates  DOUBLE arrays  and initializes
+them with zeros.
+The call is: DOUBLE list
+list         is a list  of arrays  with dimension specifica-
+             tions separated by commas.
+Name: DOUBLE 7
+The function DOUBLE  converts an expression to DOUBLE.
+The call is: v = DOUBLE (x)
+x            is a constant,  an expression  or the name of a
+             variable. x may be a scalar or an array.
+
+v            is the returned DOUBLE  value of x.
+Name: COMPLEX 2
+The command  COMPLEX creates COMPLEX arrays  and initializes
+them with zeros.
+The call is: COMPLEX list
+list         is a list  of arrays  with dimension specifica-
+             tions separated by commas.
+Name: COMPLEX 7
+The function  COMPLEX converts a pair of expressions to COM-
+PLEX.
+The call is: v = COMPLEX (x, y)
+x, y         are constants,  expressions or the names of va-
+             riables.  x may be scalars or arrays,  but must
+             have the same data type.  The argument y is op-
+             tional.
+
+v            is the returned COMPLEX value of x and y.  x is
+             converted to the real,  y is converted  to  the
+             imaginary part of v.
+Name: ATONUM 7
+The function ATONUM converts a string to a number.
+The call is: v = ATONUM (s)
+s            is a string constant or variable.
+
+v            is the  returned number.  v can have  the types
+             INT and DOUBLE.
+Name: NUMTOA 7
+The function NUMTOA converts a number to a string.
+The call is: s = NUMTOA (x, ndig)
+x            is a floating point or integer expression.
+
+ndig         is the number of digits to be considered    (>=
+             -1). The last digit will be rounded up.
+
+s            is the  returned string  containing the conver-
+             ted number.
+Name: STRING 7
+The function STRING converts an expression to STRING.
+The call is: s = STRING (x)
+x            is a constant,  an expression  or the name of a
+             variable. x may be a scalar or an array.
+
+s            is the returned  STRING.  If  x  overflows  the
+             range of  STRING data types, a warning is prin-
+             ted.
+
+Examples: a) PRINT STRING (65)     prints the string 'A'.
+
+          b) IR = {65, 66, 67, 68}
+             PRINT STRING (IR)     prints the string 'ABCD'.      

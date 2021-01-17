@@ -1,0 +1,286 @@
+                   Chapter 7: Quickplots 
+                ----------------------------
+
+This chapter  presents  quickplots  that are  collections of
+DISLIN routines to display data with one command.
+
+The following rules are applied to quickplots:
+
+ - Quickplots call DISINI automatically if it is  not called
+   before.  METAFL ('XWIN')  will  be used in  quickplots if
+   METAFL is not used before.
+
+ - On X Window terminals,  there are no calls to  ENDGRF and
+   DISFIN in quickplots, they let DISLIN in level 2 or 3. If
+   the variable  %ERASE  is set to 0,  following  quickplots
+   will  overwrite  the graphics  window without erasing the
+   window.
+
+ - On other  terminals  such as  VGA screens, quickplots are
+   terminated with DISFIN to get back to the text mode. 
+
+Note:
+
+ - All quickplots  have corresponding widget interfaces that
+   can be executed with the command
+
+   disgcl  quickplot 
+
+   where  quickplot  is the name of a quickplot.  The widget
+   interfaces for quickplots expect data in the form of data
+   files described in chapter 8, 'Data Files'. 
+
+7.1 The PLOT Command
+
+The command  PLOT makes a quickplot of two or more floating-
+point arrays.
+
+The call is:  PLOT  xray1, yray1 [,xray2, yray2, ... ,
+                                               xrayn, yrayn]
+
+xray1, yray1  are floating point arrays.
+
+Example:      x = falloc (100) <BR>
+              plot x, sin (x), x, cos (x) 
+
+7.2 The SCATTR Command
+
+The  command  SCATTR  makes  a  quickplot  of  two  or  more
+floating point arrays where the points  are marked with sym-
+bols.
+
+The call is:  SCATTR  xray1, yray1 [,xray2, yray2, ... ,
+                                               xrayn, yrayn]
+
+xray1, yray1  are floating point arrays.
+
+7.3 The PLOT3 Command
+
+The command PLOT3 makes a 3-D colour plot.
+
+The call is:  PLOT3 xray, yray, zray
+
+xray, yray,   are floating point arrays  containing  X-,  Y- 
+       zray   and Z-coordinates.
+
+7.4 The PLOT3R Command
+
+The command  PLOT3R  makes a 3-D colour plot  where the data
+are specified as rectangles.
+
+The call is:  PLOT3R x1ray,  y1ray, x2ray,  y2ray,  zray
+
+x1ray, y1ray  are floating point arrays containing X- and Y-
+              coordinates of rectangle corners.
+x2ray, y2ray  are floating point arrays containing the oppo-
+              site rectangle corners.
+zray          is a floating point array containing Z-coordi-
+              nates.
+
+7.5 The SURF3 Command
+
+The command  SURF3  makes a 3-D colour plot of a matrix. The
+columns of the matrix will be plotted as rows. 
+
+The call is:  SURF3  zmat [,xray [, yray]]
+
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a floating point  array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is missing,  an array  with the 
+              values {0.5, 1.5, ..., nx - 0.5} will be used.
+yray          is a floating point  array with  the dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray  is missing,  an array with the
+              values {0.5, 1.5, ..., ny - 0.5} will be used.
+
+7.6 The SURFACE Command
+
+The command SURFACE makes a surface plot of a matrix. 
+
+The call is:  SURFACE zmat [,xray, yray]
+
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a floating point  array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is  missing,  an array with the
+              values {0., 1., ..., nx - 1} will be used.
+yray          is a floating point  array with the  dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray is missing,  an array  with the
+              values {0., 1., ..., ny - 1} will be used.
+
+7.7 The SURSHADE Command
+
+The command SURSHADE makes a shaded surface plot of a matrix. 
+
+The call is:  SURSHADE zmat [,xray, yray]
+
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a floating point  array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is  missing,  an array with the
+              values {0., 1., ..., nx - 1} will be used.
+yray          is a floating point  array with the  dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray is missing,  an array  with the
+              values {0., 1., ..., ny - 1} will be used.
+
+7.8 The CONTOUR Command
+
+The command CONTOUR makes a contour plot of a matrix. 
+
+The call is:  CONTOUR zmat [,xray, yray, zlvray]
+         or:  CONTOUR zmat, zlvray
+
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a floating point  array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is  missing,  an array with the
+              values {0., 1., ..., nx - 1} will be used.
+yray          is a floating point  array with the  dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray is missing,  an array  with the
+              values {0., 1., ..., ny - 1} will be used.
+
+zlvray        is a floating point  array containing  the le-
+              vels. If zlvray is missing,  10 levels between
+              the minimum and maximum of zmat  will be gene-
+              rated.
+
+7.9 The CONSHADE Command
+
+The command CONSHADE makes a shaded contour plot of a matrix. 
+
+The call is:  CONSHADE zmat [,xray, yray, zlvray]
+         or:  CONSHADE zmat, zlvray
+
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a floating point  array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is  missing,  an array with the
+              values {0., 1., ..., nx - 1} will be used.
+yray          is a floating point  array with the  dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray is missing,  an array  with the
+              values {0., 1., ..., ny - 1} will be used.
+
+zlvray        is a floating point  array containing  the le-
+              vels. If zlvray is missing,  10 levels between
+              the minimum and maximum of zmat  will be gene-
+              rated.
+
+7.10 Scaling of Quickplots
+
+Normally,  quickplots are scaled automatically  in the range
+of the data.  This behaviour can be changed if certain vari-
+ables are defined.
+
+The variables for the X-axis are:
+
+ - If the system variables  %XMIN and %XMAX are defined, the
+   X-axis  will be scaled automatically in the range  %XMIN, 
+   %XMAX.
+
+ - If the system variables %XMIN, %XMAX, %XOR and %XSTEP are
+     defined,  the  scaling  and  labeling  of the X-axis is
+     completly defined by the user.
+
+ - If the system  variable  %XAUTO  is defined and set to 1,
+   the variables  %XMIN,  %XMAX,  %XOR  and  %XSTEP  will be
+   ignored  and  scaling will  be done automatically  in the
+   range of the data. 
+
+Analog:  Y-axis, Z-axis.
+
+Note:    For logarithmic scaling, the parameters must be ex-
+         ponents of base 10.
+
+7.11 Quickplot Variables
+
+There is a set of variables  that can modify  the appearance
+of quickplots.  The corresponding  DISLIN routines are given
+in parenthesis.
+
+ %X       defines the X-axis title (NAME). 
+ %Y       defines the Y-axis title (NAME). 
+ %Z       defines the Z-axis title (NAME). 
+
+ %T1      defines line 1 of the axis system title (TITLIN). 
+ %T2      defines line 2 of the axis system title (TITLIN). 
+ %T3      defines line 3 of the axis system title (TITLIN). 
+ %T4      defines line 4 of the axis system title (TITLIN).
+
+ %XTIC    sets the number of ticks for the X-axis (TICKS). 
+ %YTIC    sets the number of ticks for the Y-axis (TICKS). 
+ %ZTIC    sets the number of ticks for the Z-axis (TICKS).
+ 
+ %XDIG    sets the number of digits for the X-axis (DIGITS). 
+ %YDIG    sets the number of digits for the Y-axis (DIGITS). 
+ %ZDIG    sets the number of digits for the Z-axis (DIGITS).
+
+ %XSCL    defines the scaling of the X-axis (SCALE). 
+ %YSCL    defines the scaling of the Y-axis (SCALE). 
+ %ZSCL    defines the scaling of the Z-axis (SCALE). 
+ 
+ %XLAB    defines the labels of the X-axis (LABELS). 
+ %YLAB    defines the labels of the Y-axis (LABELS). 
+ %ZLAB    defines the labels of the Z-axis (LABELS). 
+
+ %H       defines the character size (HEIGHT). 
+ %HNAME   defines the size of axis titles (HNAME). 
+ %HTITLE  defines the size of the axis sytem title (HTITLE).  
+
+ %XPOS    defines the X-Position of the axis system (AXS-
+          POS). 
+ %YPOS    defines the Y-Position of the axis system (AXS-
+          POS). 
+
+ %XLEN     defines the size of an axis system in X-direction
+           (AXSLEN). 
+ %YLEN     defines the size of an axis system in Y-direction
+           (AXSLEN). 
+ %ZLEN     defines the size of an axis system in Z-direction
+           (AX3LEN). 
+
+ %POLCRV   defines an interpolation method used by CURVE
+           (POLCRV).
+ %INCMRK   defines line or symbol mode for CURVE (INCMRK).
+ %MARKER   selctes a symbol for CURVE (MARKER).
+ %HSYMBL   defines the size of symbols (HSYMBL).
+
+ %XRES     sets the width of points plotted by PLOT3
+           (SETRES).
+ %YRES     sets the height of points plotted by PLOT3
+           (SETRES).
+
+ %X3VIEW   sets the X-position of the viewpoint in absolut
+           3-D coordinates (VIEW3D).
+ %Y3VIEW   sets the Y-position of the viewpoint in absolut
+           3-D coordinates (VIEW3D).
+ %Z3VIEW   sets the Z-position of the viewpoint in absolut
+           3-D coordinates (VIEW3D).
+
+ %X3LEN    defines the X-axis length of the 3-D box (AXIS3D)
+ %Y3LEN    defines the Y-axis length of the 3-D box (AXIS3D)
+ %Z3LEN    defines the Z-axis length of the 3-D box (AXIS3D)
+
+ %VTITLE   defines vertical shifting for the axis system 
+           title (VKYTIT).
+ %CONSHD   selects an algorithm used for contour filling
+           (SHDMOD).
+
+Note:      The variables can also be used, to initalize
+           plotting parameters in DISINI.
+
+Example:   %X = 'X-axis'
+           %Y = 'Y-axis'
+           xray = falloc (10) 
+           plot xray, xray
+
+

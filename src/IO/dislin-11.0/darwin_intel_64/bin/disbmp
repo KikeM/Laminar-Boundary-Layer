@@ -1,0 +1,6 @@
+#!/bin/sh
+if test $# -eq 0 ; then
+  disbmp_w 
+else
+  disbmp_x "$@"
+fi

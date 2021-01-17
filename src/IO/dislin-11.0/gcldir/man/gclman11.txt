@@ -1,0 +1,283 @@
+                      Appendix B: Examples
+             -----------------------------------
+
+This appendix presents some examples of the DISLIN manual in
+DISGCL coding. The examples can be found in the  DISLIN sub-
+directory gcldir and can be executed with the command:
+
+disgcl  example 
+
+where example is one of the examples.
+
+B.1 Demonstration of CURVE
+
+%GCL
+// Demonstration of CURVE
+
+N=101
+PI    = 3.1415926
+
+XRAY  = FALLOC (N)          
+XRAY  = (XRAY - 1.) * 3.6
+YRAY1 = SIN (XRAY * PI / 180.)
+YRAY2 = COS (XRAY * PI / 180.)
+
+METAFL ('CONS')
+DISINI ()
+COMPLX ()
+PAGERA ()
+
+NAME   ('X-axis', 'X') 
+NAME   ('Y-axis', 'Y') 
+TITLIN ('Demonstration of CURVE', 2)
+TICKS  (10, 'X')
+LABDIG (-1, 'X')
+
+GRAF   (0.,360.,0.,90.,-1.,1.,-1.,0.5)
+TITLE  ()
+
+CURVE  (xray, yray1, n)
+CURVE  (xray, yray2, n)
+
+DASH   ()
+XAXGIT ()
+DISFIN ()
+
+B.2 3-D Colour Plot
+
+%GCL
+// 3-D Colour Plot
+ 
+N = 100
+FLOAT ZMAT[N,N], XRAY[N]
+
+PI = 3.1415927
+STEP = 2. * PI / (N - 1)
+
+DO I = 0, N - 1
+  XRAY[I] = SIN (I * STEP)
+END DO
+
+DO J = 0, N - 1
+  ZMAT[*,J] = 2 * XRAY * SIN (J * STEP)
+END DO
+
+METAFL ('CONS')
+DISINI ()
+COMPLX ()
+PAGERA ()
+
+LABDIG (-1, 'XYZ')
+NAME   ('X-Achse', 'X') 
+NAME   ('Y-Achse', 'Y') 
+NAME   ('Z-Achse', 'Z') 
+TITLIN ('3-D Colour Plot of the Function', 1)
+TITLIN ('F(X,Y) = 2 * SIN(X) * SIN(Y)', 3)
+
+AUTRES (50,50)
+GRAF3  (0.,360.,0.,90.,0.,360.,0.,90.,-2.,2.,-2.,1.0)
+TITLE  ()
+
+CRVMAT (ZMAT, N, N, 1, 1)
+MPAEPL (3)
+DISFIN ()
+
+B.3 Surface Plot
+
+%GCL
+// Surface Plot
+N = 100
+FLOAT ZMAT[N,N], XRAY[N]
+
+PI = 3.1415927
+STEP = 2. * PI / (N - 1)
+
+DO I = 0, N - 1
+  XRAY[I] = SIN (I * STEP)
+END DO
+
+DO J = 0, N - 1
+  ZMAT[*,J] = 2 * XRAY * SIN (J * STEP)
+END DO
+
+METAFL ('CONS')
+SETPAG ('DA4P')
+DISINI ()
+COMPLX ()
+PAGERA ()
+
+AXSPOS (200, 2600)
+AXSLEN (1800, 1800)
+
+NAME   ('X-axis', 'X') 
+NAME   ('Y-axis', 'Y') 
+NAME   ('Z-axis', 'Z') 
+
+TITLIN ('Surface Plot (SURMAT)', 2)
+TITLIN ('F(X,Y) = 2 * SIN(X) * SIN(Y)', 4)
+
+VIEW3D (-5.,-5.,4.,'ABS') 
+GRAF3D (0.,360.,0.,90.,0.,360.,0.,90.,-3.,3.,-3.,1.)
+HEIGHT (50)
+TITLE  ()
+
+COLOR  ('GREEN')
+SHLSUR ()
+SURMAT (ZMAT, N, N, 1, 1)
+
+DISFIN ()
+
+B.4 Contour Plot
+
+%GCL
+// Contour Plot
+N = 100
+FLOAT ZMAT[N,N], XRAY[N]
+
+FPI = 3.1415927 / 180.
+STEP = 360. / (N - 1)
+X = FALLOC (N) * STEP
+Y = FALLOC (N) * STEP
+
+DO J = 0, N - 1
+  ZMAT[*,J] = 2 * SIN (X * FPI) * SIN (Y[J] * FPI)
+END DO
+
+METAFL ('CONS')
+SETPAG ('DA4P')
+DISINI ()
+COMPLX ()
+PAGERA ()
+
+INTAX  ()
+AXSPOS (450, 2670)
+
+NAME   ('X-axis', 'X') 
+NAME   ('Y-axis', 'Y') 
+TITLIN ('Contour Plot', 2)
+TITLIN ('F(X,Y) = 2 * SIN(X) * SIN(Y)', 4)
+
+GRAF (0.,360.,0.,90.,0.,360.,0.,90.)
+
+HEIGHT (30)
+DO I = 1,9
+  ZLEV = -2.0 + (I - 1) * 0.5
+   IF (I == 5)
+    LABELS ('NONE', 'CONTUR')
+   ELSE
+    LABELS ('FLOAT', 'CONTUR')
+  END IF
+  CONTUR (X, N, Y, N, ZMAT, ZLEV) 
+END DO
+
+HEIGHT (50)
+TITLE  ()
+DISFIN ()
+
+B.5 Shaded Contour Plot
+
+%GCL
+// Shaded Contour Plot
+
+N = 100
+FLOAT ZMAT[N,N], XRAY[N], YRAY[N], ZLEV[12]
+
+STEP = 1.6 / (N - 1)
+XRAY = FALLOC (N) * STEP
+YRAY = FALLOC (N) * STEP
+X    = XRAY * XRAY - 1
+
+DO J = 0, N - 1
+  Y=YRAY[J] * YRAY[J] - 1.
+  ZMAT[*,J] = X * X + Y * Y
+END DO
+
+METAFL ('CONS')
+SETPAG ('DA4P')
+DISINI ()
+COMPLX ()
+PAGERA ()
+
+NAME   ('X-axis', 'X') 
+NAME   ('Y-axis', 'Y') 
+
+MIXALF ()
+TITLIN ('Shaded Contour Plot', 1)
+TITLIN ('F(X,Y) = (X[2$ - 1)[2$ + (y[2$ - 1)[2$', 3)
+
+SHDMOD ('POLY', 'CONTUR')
+AXSPOS (450, 2670)
+GRAF   (0., 1.6, 0., 0.2, 0., 1.6, 0., 0.2)
+
+HEIGHT (30)
+DO I = 0, 11
+  ZLEV[11-I] = 0.1 + I * 0.1
+END DO
+
+CONSHD (XRAY, N, YRAY, N, ZMAT, ZLEV, 12) 
+
+HEIGHT (50)
+TITLE  ()
+DISFIN ()
+
+B.6 World Coastlines and Lakes
+
+METAFL ('CONS')
+DISINI ()
+PAGERA ()
+COMPLX ()
+
+AXSPOS (400, 1850)
+AXSLEN (2400, 1400)
+
+NAME   ('Longitude', 'X')
+NAME   ('Latitude', 'Y')
+TITLIN ('World Coastlines and Lakes', 3)
+
+LABELS ('MAP', 'XY')
+GRAFMP (-180.,180.,-180.,90.,-90.,90.,-90.,30.)
+
+GRIDMP (1, 1)
+COLOR  ('GREEN')
+WORLD  ()
+COLOR  ('FORE')
+
+HEIGHT (50)
+TITLE  ()
+DISFIN ()
+
+B.7 Widgets
+
+%GCL
+// Widgets
+ 
+CL1  = 'Item1|Item2|Item3|Item4|Item5'
+CFIL = ' '
+
+SWGTIT ('Example')
+IP = WGINI ('VERT')
+ID_LAB = WGLAB (IP, 'File Widget: ')
+ID_FIL = WGFIL (IP, 'Open File', CFIL, '*.c')
+
+ID_LAB = WGLAB (IP, 'List Widget: ')
+ID_LIS = WGLIS (IP, CL1, 1)
+
+ID_LAB = WGLAB (IP, 'Button Widgets')
+ID_BT1 = WGBUT (IP, 'This is Button 1', 0)
+ID_BT2 = WGBUT (IP, 'This is Button 2', 1)
+
+ID_LAB = WGLAB (IP, 'Scale Widget')
+ID_SCL = WGSCL (IP, ' ', 0., 10., 5., 1)
+
+ID_OK  = WGOK  (IP)
+WGFIN ()
+
+CFIL = GWGFIL (ID_FIL)
+ILIS = GWGLIS (ID_LIS)
+IBT1 = GWGBUT (ID_BT1)
+IBT2 = GWGBUT (ID_BT2)
+XSCL = GWGSCL (ID_SCL)
+
+FREE IP, CL1, ID_LAB, ID_OK, ID_FIL, ID_LIS, ID_BT1 @
+     ID_BT2, ID_SCL
+LIST

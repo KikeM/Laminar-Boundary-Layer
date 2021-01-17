@@ -1,0 +1,57 @@
+Name: DATFIL  4
+The routine DATFIL opens a file for data input.
+The call is:  ISTAT = DATFIL (CFIL)
+CFIL          is  the  name  of the  data file.  The default
+              extension is '.gdf' (Graphics Data File). 
+ISTAT         is the returned status.  DATFIL returns -1  if
+              it fails, or zero.
+Name: DATCLS  4
+The routine DATCLS closes the current data file.
+The call is:  ISTAT = DATCLS ()
+ISTAT         is the returned status.  DATCLS returns -1  if
+              it fails, or zero.
+Name: DATHDR  4
+The routine  DATHDR  prints the header of a data file on the
+screen.
+The call is:  ISTAT = DATHDR ()
+ISTAT         is the returned status of  DATHDR and can have
+              the  values 0 and -1. On error, DATHDR returns
+              -1.
+Name: DATVAR  4
+The routine  DATVAR  returns the value of a variable defined
+in the header of a data file.
+The call is:  V = DATVAR (CNAME)
+CNAME         is the name of the variable.
+Name: DATCNT  4
+The routine DATCNT returns the number of data of the current
+data block in a data file.
+The call is:  N = DATCNT (COPT)
+COPT          is a string with the values
+ = 'ROWS'     means  the number of rows in the  current data
+              block.
+ = 'COLUMNS'  means  the number  of columns  in the  current
+              data block.
+ = 'FULL'     means  the number  of data in the current data
+              block.
+ = 'BLOCKS'   means the number of blocks in the data file.
+Name: DATRAY  4
+The routine  DATRAY  creates an array containing a column of
+the current data block in a data file.
+The call is:  XRAY = DATRAY (NCOLUMN)
+NCOLUMN       defines the column of the data file.
+XRAY          is a floating point array returned by DATRAY.
+Name: DATMAT  4
+The routine  DATMAT  creates an array  containing  the whole
+current data block of the data file.
+The call is:  XMAT = DATMAT ()
+XMAT          is a  twodimensional  floating point array re-
+              turned by DATMAT.
+Name: DATBLK  4
+The routine  DATBLK  sets the  current  data block of a data
+file.
+The call is:  ISTAT = DATBLK (NBLOCK)
+NBLOCK        specifies the current data block.
+ISTAT         is the  returned status.  DATBLK  returns 0 if
+              the data block  NBLOCK  is defined,  and -1 if
+              NBLOCK  is not  defined  in the  current  data
+              file.

@@ -1,0 +1,111 @@
+%GCL
+// Quickplot command PLOT with Widget Interface
+int iray[10]
+
+dsp = getdsp ()
+if (dsp == "NOXW")
+  print ">>>> No X Window terminal"
+  exit
+end if
+
+include "plot.ini"
+
+cxmin   = numtoa (%xmin , 1)
+cxmax   = numtoa (%xmax , 1)
+cxor    = numtoa (%xor  , 1)
+cxstp   = numtoa (%xstep, 1)
+
+cymin   = numtoa (%ymin , 1)
+cymax   = numtoa (%ymax , 1)
+cyor    = numtoa (%yor  , 1)
+cystp   = numtoa (%ystep, 1)
+
+cxcol   = numtoa (nxcol, -1)
+cycol   = numtoa (nycol, -1)
+
+cblock  = numtoa (nblock, -1)
+
+ixscl = 0
+iyscl = 0
+if (%xscl == 'LOG') ixscl = 1
+if (%yscl == 'LOG') iyscl = 1
+
+idev    = 1
+ipol    = 1
+irev    = 0
+
+swghlp ("The GCL script PLOT is a widget interface|for the GCL command PLOT")
+swgtit ("PLOT")
+swgpop ("NOOK")
+
+ip_ini  = wgini ("hori")
+ip1     = wgbas (ip_ini, "vert")
+ip2     = wgbas (ip_ini, "vert")
+ip3     = wgbas (ip_ini, "vert")
+
+id      = wglab (ip1, "Data File:")                  // Data File
+id_file = wgfil (ip1, "Data File", cdata, "*.gdf") 
+
+id      = wglab (ip1, " ")                           // Device
+id      = wglab (ip1, "Device:")                      
+id_lis  = wglis (ip1, "Screen|Full Screen|PostScript", idev)
+
+id      = wglab (ip1, " ")                           // Scaling
+id      = wglab (ip1, "Scaling:")      
+              
+id_but1 = wgbut (ip1, "User-def. X-scaling", 1 - %xauto)  // Scaling X-axis
+id_but2 = wgbut (ip1, "User-def. Y-scaling", 1 - %yauto)  // Scaling Y-axis
+
+id      = wglab (ip1, " ")                     
+id      = wglab (ip1, "Linear/Log Axis Scaling")
+id_but3 = wgbut (ip1, "Log. X-axis", ixscl)          // Scaling X-axis
+id_but4 = wgbut (ip1, "Log. Y-axis", iyscl)          // Scaling Y-axis
+
+id      = wglab (ip1, " ")                           // Device
+id      = wglab (ip1, "Interpolation:")                      
+id_lis2 = wglis (ip1, "Linear|Step|Bars|Spline|Parametric Spline", ipol)
+
+id      = wglab (ip2, "Column Selection:")           // Data File Columns
+id_xcol = wgltxt (ip2, "X-Column:", cxcol, 35)
+id_ycol = wgltxt (ip2, "Y-Column:", cycol, 35)
+
+id      = wglab (ip2, " ") 
+id      = wglab (ip2, "Data Block Selection:")      // Data File Block
+id_block = wgltxt (ip2, "Data Block:", cblock, 35)
+
+id      = wglab (ip2, " ") 
+id      = wglab (ip2, "User-def. X-Scaling:")      // Axis system scaling
+id_xmin = wgltxt (ip2, "X-Minimum:", cxmin, 35)
+id_xmax = wgltxt (ip2, "X-Maximum:", cxmax, 35)
+id_xor  = wgltxt (ip2, "X-Origin:",  cxor,  35)
+id_xstp = wgltxt (ip2, "X-Step:",    cxstp, 35)
+
+id      = wglab (ip2, " ")
+id      = wglab (ip2, "User-def. Y-Scaling:")      // Axis system scaling
+id_ymin = wgltxt (ip2, "Y-Minimum:", cymin, 35)
+id_ymax = wgltxt (ip2, "Y-Maximum:", cymax, 35)
+id_yor  = wgltxt (ip2, "Y-Origin:",  cyor,  35)
+id_ystp = wgltxt (ip2, "Y-Step:",    cystp, 35)
+
+id      = wglab (ip3, "Title:")          // Title
+id_tit1 = wgtxt (ip3, %t1)
+id_tit2 = wgtxt (ip3, %t2)
+id_tit3 = wgtxt (ip3, %t3)
+id_tit4 = wgtxt (ip3, %t4)
+
+id      = wglab (ip3, " ")                // X-axis Title
+id      = wglab (ip3, "X-Title:") 
+id_xtit = wgtxt (ip3, %x)
+
+id      = wglab (ip3, " ") 
+id      = wglab (ip3, "Y-Title:") 
+id_ytit = wgtxt (ip3, %y)
+
+id      = wglab (ip3, " ") 
+id_but5 = wgbut (ip3, "Reverse Screen", irev) 
+id      = wglab (ip3, " ") 
+id      = wglab (ip3, " ") 
+id_pbut = wgpbut(ip3, "OK")
+swgcb (id_pbut, "plotcb", iray)
+id      = wgquit(ip3)
+wgfin ()

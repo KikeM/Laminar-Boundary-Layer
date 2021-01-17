@@ -1,0 +1,6 @@
+#!/bin/sh
+if test $# -eq 0 ; then
+  dismov_w 
+else
+  dismov_x "$@"
+fi

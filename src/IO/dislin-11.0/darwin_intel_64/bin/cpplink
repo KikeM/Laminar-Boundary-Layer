@@ -1,0 +1,92 @@
+if test $# -eq 0
+then echo ""
+echo "    /******************************************************************/"
+echo "    /**                     C P P L I N K                            **/"
+echo "    /**                                                              **/"
+echo "    /** CPPLINK links C++ programs using DISLIN routines.            **/"
+echo "    /**                                                              **/"
+echo "    /** Command:    cpplink    [option]     main                     **/"
+echo "    /**                                                              **/"
+echo "    /** option      is an optional  parameter  that can  have one of **/"
+echo "    /**             the following values:                            **/"
+echo "    /**        -c   for compiling programs before linking            **/"
+echo "    /**        -r   for running programs after linking               **/"
+echo "    /**        -a   for compiling, linking and running programs.     **/"
+echo "    /**                                                              **/"
+echo "    /** main        is the name of the main program or may be in the **/"
+echo "    /**             form   'main obj lib'   where obj is  a field of **/"
+echo "    /**             object files and lib a  field of library  files. **/"
+echo "    /**             Several files must be separated by blanks.       **/"
+echo "    /**             A file  'main'  will be created after linking.   **/"
+echo "    /**                                                              **/"
+echo "    /** Example:    cpplink  -a  test mylib.a                        **/"
+echo "    /******************************************************************/"
+  exit 0
+fi
+
+if test ! $DISLIN; then
+ DISLIN=/usr/local/dislin
+fi
+
+opt1=-x
+if test $1 = -c ; then
+  opt1=-c
+  shift
+elif test $1 = -a ; then
+  opt1=-a
+  shift
+elif test $1 = -r ; then
+  opt1=-r
+  shift
+fi
+
+if test $# -eq 0 ; then
+  echo "<<<< File is missing!"
+  exit 0
+fi
+
+if test $# -eq 0 ; then
+  echo "<<<< File is missing!"
+  exit 0
+fi
+
+name=$1
+if test $opt1 = -x || test $opt1 = -r ; then
+  if test ! -f ${name}.o ; then
+     echo " >>>> Cannot find file ${name}.o" 
+     exit 0
+  fi
+  bname=`basename ${name}`
+fi
+
+ext=cpp
+comp=g++
+
+if test $opt1 = -c || test $opt1 = -a ; then
+  if test ! -f ${name}.$ext ; then
+     echo " >>>> Cannot find file ${name}.$ext" 
+     exit 0
+  fi
+  bname=`basename ${name}`
+fi
+
+
+libs="-L$DISLIN -ldiscpp"
+incpath=$DISLIN
+
+xlibs="-L/usr/OpenMotif/lib -lXm"
+params="$2 $3 $4 $5 $6 $7"
+
+if test $opt1 = -c; then
+  $comp -m64 -I${incpath} ${name}.$ext -o $bname $params $libs $xlibs
+elif test $opt1 = -a ; then
+  $comp -m64 -I${incpath} ${name}.$ext -o $bname $params $libs $xlibs
+else 
+  $comp -m64 ${name}.o -o $bname $params $libs $xlibs
+fi
+
+if test $opt1 = -a ; then
+  ./$bname
+elif test $opt1 = -r ; then
+  ./$bname
+fi

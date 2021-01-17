@@ -1,0 +1,160 @@
+                 Chapter 2: Data Types, Variables
+             -----------------------------------------
+
+This chapter explains the  DISGCL  data types  and shows how
+to specify constants and variables.
+
+2.1 Data Types
+
+As described  in the last chapter,  DISGCL data can have the
+following types:
+
+     ---------------------------------------------------
+     |  Type   |  Bytes  |           Range             |
+     ---------------------------------------------------
+     | CHAT    |    1    |      -128   -  127          |
+     ---------------------------------------------------
+     | BYTE    |    1    |         0   -  255          |
+     ---------------------------------------------------
+     | SHORT   |    2    |    -32768   -  32767        |
+     ---------------------------------------------------
+     | INT     |    4    | -2147483648 -  2147483647   |
+     ---------------------------------------------------
+     | FLOAT   |    4    |     1.2E-38 -  3.4E+38      |
+     ---------------------------------------------------
+     | DOUBLE  |    8    |    2.2E-308 -  1.8E+308     |
+     ---------------------------------------------------
+     | COMPLEX |    8    |     1.2E-38 -  3.4E+38      |
+     ---------------------------------------------------
+     | STRING  |  n + 1  |                             |
+     ---------------------------------------------------
+                    Figure 2.1: Data Types 
+  
+2.2 Variables
+
+All data in DISGCL are variables or constants.  As in  other
+programming  languages,  variables  can change  their values
+during the lifetime of a DISGCL session.  But in DISGCL, va-
+riables can also  change their types, and they don't have to
+be declared.
+
+The following rules are applied to variables:
+
+ - The first  character  must be a letter.  Other characters
+   can be letters, digits, or underscores.
+ - The first  16 characters  of variable names  are signifi-
+   cant.
+ - DISGCL is not case-sensitive. Variable  names,  keywords, 
+   functions,  routines  and parameters  can be specified in
+   uppercase and lowercase letters.
+
+2.3 System Variables
+
+System variables  are special  variables  with  a predefined
+meaning.  For example,  system variables  can be used to set
+options for quickplots.  System variables begin with the '%'
+character and are available to all GCL units such as subrou-
+tines and functions.
+
+2.4 Specifying Constants
+
+Constants are  data  that cannot  change their values during
+the  life  of a  DISGCL session. Constants can  be integers,
+floating point numbers and strings.
+
+Integer constants can be specified in decimal or hexadecimal
+notation. Floating point constants  contain  a decimal point
+and can have an exponential part preceded by e or E.
+String  constants must be enclosed  in a pair of either apo-
+strophes or quotation marks.  Complex constants  contain the
+keyword  'COMPLEX' and a real and imaginary part. The imagi-
+nary part is optional  and assumed to be zero if it is omit-
+ted.
+
+Examples:
+           ----------------------------------
+           |   Constant    |     Type       |
+           ----------------------------------
+           |     120       |    Decimal     |
+           ----------------------------------
+           |     0xFF      |  Hexadecimal   |
+           ----------------------------------
+           |     0.56      | Floating point |
+           ----------------------------------
+           |    3.6E2      | Floating point |
+           ----------------------------------
+           |    "ABC"      |     String     |
+           ----------------------------------
+           |    'abc'      |     String     |
+           ----------------------------------
+           | COMPLEX (3,4) |    COMPLEX     |
+           ----------------------------------
+           | COMPLEX (7)   |    COMPLEX     |
+           ----------------------------------
+                Figure 2.2: Constants 
+
+2.5 Arrays
+
+An array is a collection  of data that  share the same  type
+and a common name.  Array elements can be accessed by speci-
+fying indices in square brackets.
+
+Examples:
+
+  A[i] = 5
+  B[i, j] = 8
+
+There are several ways to create arrays in DISGCL:
+
+ - If an expression is assigned to a variable  and the value
+   of the expression is an array,  the variable will also be
+   an array.
+ - The DISGCL commands CHAR, BYTE, SHORT, INT, FLOAT, DOUBLE
+   and COMPLEX  create corresponding  arrays  and initialize
+   them with zeros.
+    
+   Example:
+
+   INT A[10], B[20,10] 
+
+ - Integer and floating point arrays can be created and ini-
+   tialized with the statement:
+
+   vray = { list }
+
+   where  list  is a constant  list of integers or floating-
+   point numbers separated by commas.
+
+Notes:
+
+ - Array subscripts begin with the number 0.
+ - If a subscript  is out of range,  DISGCL prints a warning
+   and cancels the calculation.
+ - Multidimensional arrays are stored by rows.
+ - If a subscript appears in a string, the string element is
+   handled as an integer  where the value  of the integer is
+   the ASCII code of the string element. 
+
+2.6 Subscripts
+
+Subscripts  can be  used to  access single array elements or
+sections of arrays. The following are examples of array sub-
+scripts: 
+
+  A[i]         Element i of array A
+  A[i:j]       Array section of size j - i + 1
+  B[i1:i2, j]  Elements i1 to i2 of column j
+  B[:i2, j]    Elements 0 to i2 of column j
+  B[i1:, j]    Elements i1 to m - 1 of column j
+  B[*, j]      The whole column j.
+
+2.7 Character Arrays and Strings
+
+Strings in DISGCL are stored as character arrays  terminated
+with  ASCII value zero.  Normally, strings and character ar-
+rays can be used in the same way if character arrays contain
+a string terminator.  Some I/O functions  require  character
+arrays  instead  of strings to  store characters.  Character
+arrays can be defined with the CHAR command.
+
+

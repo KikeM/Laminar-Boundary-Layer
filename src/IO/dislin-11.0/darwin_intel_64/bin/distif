@@ -1,0 +1,6 @@
+#!/bin/sh
+if test $# -eq 0 ; then
+  distif_w 
+else
+  distif_x "$@"
+fi

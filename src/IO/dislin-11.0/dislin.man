@@ -1,0 +1,194 @@
+.TH DISLIN 1 "15 Dec 2009"
+.SH NAME
+dislin  - Data Plotting Library
+
+.SH DESCRIPTION
+DISLIN is a high-level and easy to use plotting library for 
+displaying data as curves, bar graphs, pie charts, 3-D colour
+plots, surfaces, contours and maps.
+
+Normally, DISLIN contains native libraries for the programming
+languages Fortran 77, Fortran 90 and C and extension modules
+for the languages Java, Perl and Python. The following utilities
+are included
+
+  clink    disaps   disdrv   disgif   dishlp   disimg  
+  disman   dismov   distif   dlink    f90link
+
+.SH  CLINK
+Links C programs using DISLIN routines.
+
+.SH SYNOPSIS
+                clink    [option]   main
+
+    option      is an optional parameter that can have
+                one of the following values:  
+           -c   for compiling programs before linking
+           -r   for running programs after linking   
+           -a   for compiling, linking and running
+                programs.
+
+    main        is the  name of  the main program.
+
+Example:        clink  -a  myprg
+
+.SH DISAPS
+  Converts an ASCII file to PostScript.
+
+.SH SYNOPSIS
+                 disaps filename output [options]
+
+  filename       is the name of the ASCII file.
+
+  outout         is the name of the output file. 
+                 By default, the name of the input file
+                 and the extension ps will be used.
+
+  options        is an optional field of keywords 
+                 (see disaps).
+
+.SH DISDRV
+  Sends a plotfile to a device or converts the file
+  format.
+
+.SH SYNOPSIS
+                 disdrv filename[.met] [device] [options]
+
+  filename       is the name of the plotfile.
+
+  device         is a device name.
+     =  CONS     Tektronix or X Window emulation
+                 (default)
+     =  XWIN     X Window terminal (small screen mode)
+     =  XWND     X Window terminal (full screen mode)
+
+     =  POST     converts a CGM or GKSLIN file to 
+                 PostScript.
+     =  PSCL     converts a CGM or GKSLIN file to coloured 
+                 PostScript.
+     =  HPGL     converts a CGM or GKSLIN file to HPGL.
+     =  CGM      converts a GKSLIN file to a CGM file.
+     =  GKSLIN   converts a CGM file to a GKSLIN file.
+
+  options        is an optional field of keywords 
+                 (see disdrv).   
+
+.SH DISHLP
+  Prints the description of a DISLIN routine on the
+  screen.
+
+.SH SYNOPSIS
+                 dishlp     [routine]  [options]
+
+  routine        is the name of a DISLIN routine.
+
+  options        is an optional field of keywords 
+                 (see dishlp).   
+
+.SH DISIMG
+  Displays an image created by DISLIN on the screen or
+  sends it to a PostScript printer
+ 
+.SH SYNOPSIS
+                 disimg filename[.img] [device] [options]
+
+  filename       is the name of the image file. The file
+                 must be created with the routine rimage.
+
+  device         is the device name.
+
+  options        is an optional field of keywords
+                 (see disimg).
+
+.SH DISMAN
+  Prints an ASCII version of the DISLIN manual on the
+  screen.
+
+.SH SYNOPSIS
+                 disman   [options]
+
+  options        is an optional field of keywords
+                 (see disman).   
+
+.SH DISMOV
+  Displays a sequence of image files.
+ 
+.SH SYNOPSIS
+                 dismov filename[.mov] [device] [options]
+
+  filename       is the name of a data file where the 
+                 filenames of the images are stored 
+                 (1 line for each filename).
+                 The images must be created with the 
+                 routine rimage.
+
+  device         is the device name.
+
+  options        is an optional field of keywords
+                 (see dismov).
+
+.SH DISTIF
+  Displays a TIFF file created by DISLIN on the screen or
+  sends it to a PostScript printer.
+
+.SH SYNOPSIS
+                 distif filename[.tif] [device] [options]
+
+  filename       is the name of the TIFF file. The file
+                 must be created with the routine rtiff. 
+
+  device         is the device name.
+
+  options        is an optional field of keywords
+                 (see distif).
+
+.SH DLINK
+  Links FORTRAN programs using DISLIN routines.
+
+.SH SYNOPSIS
+                 dlink    [option]   main
+
+      option     is an optional parameter that can have
+                 one of the following values:  
+             -c  for compiling programs before linking
+             -r  for running programs after linking   
+             -a  for compiling, linking and running 
+                 programs.
+
+      main       is the name of the main program.
+
+  Example:       dlink  -a  myprg
+
+.SH F90LINK
+  Links FORTRAN 90 programs using DISLIN routines.
+
+.SH SYNOPSIS
+                 f90link    [option]   main
+
+      option     is an optional parameter that can have
+                 one of the following values:  
+             -c  for compiling programs before linking
+             -r  for running programs after linking   
+             -a  for compiling, linking and running
+                 programs.
+
+      main       is the name of the main program.
+
+  Example:       f90link  -a  myprg
+
+.SH EXAMPLES
+  DISLIN examples can be found in the DISLIN subdirectory
+  examples. 
+
+.SH AUTHOR
+DISLIN is written by 
+
+          Helmut Michels, Tel. (05556) 979334,
+          Max Planck Institute  for Solar System Research,
+          D-37191 Katlenburg-Lindau, Germany,
+          E-mail: michels@mps.mpg.de
+
+.SH URL
+The DISLIN Home Page is 
+
+          http://www.dislin.de

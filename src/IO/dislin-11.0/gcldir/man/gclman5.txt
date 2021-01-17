@@ -1,0 +1,107 @@
+                  Chapter 5: DISGCL Commands
+               -------------------------------
+
+This chapter describes several DISGCL commands.
+
+5.1 Termination of DISGCL
+
+The command EXIT terminates a DISGCL session.
+
+The call is:  EXIT
+
+5.2 Getting Help
+
+The HELP command activates a menu for getting help.
+
+The call is:  HELP
+
+5.3 Including DISGCL Files
+
+A DISGCL file can be included into another GCL file or GCL
+session with the statement
+
+INCLUDE 'file[.gcl]'
+
+Notes:
+
+ - Up to 8 include files can be nested.
+ - DISGCL searches  the  current working  directory for the
+   filename. If the search fails, GCL searches the directo-
+   ry defined by the environment variable GCL_PATH.
+
+5.4 Listing Variables
+
+The command LIST list all defined variables.
+
+The call is: LIST  [option]  [v1, v2, ..., vn]
+
+option       can have the values  -s  and -u. If -s is used,
+             only  system  variables  are listed,  if  -u is
+             used, only user-defined variables are listed.
+
+v1, v2, ..,  are the names of variables. If no variables are
+         vn  specified, all defined variables are listed.
+
+5.5 Freeing Variables
+
+The command  FREE  deallocates the space allocated by arrays
+and strings.
+
+The call is:    FREE v1, v2, ..., vn
+
+v1, v2, .., vn  are the names of variables.
+
+5.6 The PRINT Command
+
+The command  PRINT  prints the value of an expression on the
+screen.
+
+The call is:      PRINT expr1, expr2, ..., exprn
+
+expr1, expr2, .., exprn   are expressions.
+
+5.7 The PRINTL Command
+
+The command  PRINTL prints the values of expressions  on the
+screen. While the PRINT command may print values on multiple
+lines, PRINTL prints the expression values into one line se-
+parated by one blank. The line is terminated with a  newline 
+character. 
+
+The call is:      PRINTL expr1, expr2, ..., exprn
+
+expr1, expr2, .., exprn   are expressions.
+
+5.8 Logging Commands
+
+The command  LOGON defines a file where interactive commands
+will be logged.
+
+The call is:  LOGON cfil
+
+cfil          is a string containing a filename.
+
+Notes:
+
+ - Logging can be terminated with the command LOGOFF.
+ - A log file can be executed  with the DISGCL  command,  or
+   can be included  into  a DISGCL session with the  INCLUDE
+   statement.
+ - If the file cfil already exists,  a new file version will 
+   be created.
+
+5.9 Creating Arrays
+
+The commands  BYTE,  CHAR,  INT,  SHORT,  FLOAT,  DOUBLE and
+COMPLEX create corresponding arrays and initialize them with
+zeros.
+
+The call is:  FLOAT list
+
+list          is a list  of arrays with dimension specifica-
+              tions separated by commas.
+
+Example:      FLOAT A[10], B[5,10]   creates an array A with
+              10 elements  and a matrix B with 5 rows and 10
+              columns.
+

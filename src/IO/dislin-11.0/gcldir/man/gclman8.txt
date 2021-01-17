@@ -1,0 +1,162 @@
+                  Chapter 8: Data Files
+               ---------------------------
+
+This  chapter  describes  data  files  that  can be  used to
+include data into DISGCL jobs.  The format of data  files is
+very simple and useful for most DISLIN plotting routines.
+  
+8.1 Syntax of Data Files
+
+ - A data file must begin with the keyword '%GCL-ASC'.
+
+ - Each line may contain up to 512 characters.
+
+ - Lines are  allowed to carry trailing comment fields, fol-
+   lowing  a  double  slash (//).  Empty  lines  are also be
+   interpreted as comment lines.
+
+ - A data file can contain an optional header beginning with
+   the keyword %HEADER. Variables can be defined in the hea-
+   der in the form  name = value, where value is an integer, 
+   a floating point number  or a string. Strings must be en-
+   closed  in a  pair  of  either  apostrophes or  quotation
+   marks. 
+
+ - A data field begins with the keyword %DATA. The first non
+   comment  line  after  %DATA  must contain  the  number of
+   columns  of the data field.  The following lines give the
+   data separated by blanks or commas. Data can be specified
+   as integer or floating point numbers where floating point
+   numbers can contain an exponent part.
+
+ - Multiple data blocks can be given in one data file.
+
+8.2 Data File Routines
+
+The following routines handle data files.
+
+                         D A T F I L
+
+The routine DATFIL opens a file for data input.
+
+The call is:  ISTAT = DATFIL (CFIL)
+
+CFIL          is  the  name  of the  data file.  The default
+              extension is '.gdf' (Graphics Data File). 
+
+ISTAT         is the returned status.  DATFIL returns -1  if
+              it fails, or zero.
+
+Note:         DISGCL searches  the current working directory
+              for the data file. If the search fails, DISGCL
+              searches the directory defined by the environ-
+              ment variable GCL_DATA.
+
+                         D A T C L S
+
+The routine DATCLS closes the current data file.  It returns
+-1 if it fails, or zero.
+
+The call is:  ISTAT = DATCLS ()
+
+                         D A T H D R 
+
+The routine  DATHDR  prints the header of a data file on the
+screen.
+
+The call is:  ISTAT = DATHDR ()
+
+ISTAT         is the returned status of  DATHDR and can have
+              the  values 0 and -1. On error, DATHDR returns
+              -1.
+
+                         D A T V A R 
+
+The routine  DATVAR  returns the value of a variable defined
+in the header of a data file.
+
+The call is:  V = DATVAR (CNAME)
+
+CNAME         is the name of the variable.
+
+                         D A T C N T 
+
+The routine DATCNT returns the number of data of the current
+data block in a data file.
+
+The call is:  N = DATCNT (COPT)
+
+COPT          is a string with the values
+ = 'ROWS'     means  the number of rows in the  current data
+              block.
+ = 'COLUMNS'  means  the number  of columns  in the  current
+              data block.
+ = 'FULL'     means  the number  of data in the current data
+              block.
+ = 'BLOCKS'   means the number of blocks in the data file.
+
+                         D A T R A Y 
+
+The routine  DATRAY  creates an array containing a column of
+the current data block in a data file.
+
+The call is:  XRAY = DATRAY (NCOLUMN)
+
+NCOLUMN       defines the column of the data file.
+XRAY          is a floating point array returned by DATRAY.
+
+                         D A T M A T
+
+The routine  DATMAT  creates an array  containing  the whole
+current data block of the data file.
+
+The call is:  XMAT = DATMAT ()
+
+XMAT          is a  twodimensional  floating point array re-
+              turned by DATMAT.
+
+                         D A T B L K
+
+The routine  DATBLK  sets the  current  data block of a data
+file.
+
+The call is:  ISTAT = DATBLK (NBLOCK)
+
+NBLOCK        specifies the current data block.
+ISTAT         is the  returned status.  DATBLK  returns 0 if
+              the data block  NBLOCK  is defined,  and -1 if
+              NBLOCK  is not  defined  in the  current  data
+              file.
+
+8.3 Example
+
+  %GCL-ASC
+  %DATA
+  3         // Number of columns
+  //   x     sin(x)   cos(x)
+  0.000000 0.000000 1.000000   
+  14.545455 0.251148 0.967949
+  29.090910 0.486197 0.873849
+  43.636364 0.690079 0.723734
+  58.181820 0.849725 0.527225
+  72.727272 0.954902 0.296920
+  87.272728 0.998867 0.047582 
+  101.818184 0.978802 -0.204807
+  116.363640 0.895994 -0.444067
+  130.909088 0.755750 -0.654861
+  145.454544 0.567060 -0.823677
+  160.000000 0.342020 -0.939693
+  174.545456 0.095056 -0.995472
+  189.090912 -0.158001 -0.987439
+  203.636368 -0.400931 -0.916108
+  218.181824 -0.618159 -0.786053
+  232.727280 -0.795762 -0.605610
+  247.272720 -0.922354 -0.386345
+  261.818176 -0.989821 -0.142315
+  276.363647 -0.993838 0.110838
+  290.909088 -0.934148 0.356886
+  305.454559 -0.814576 0.580057
+  320.000000 -0.642788 0.766044
+  334.545441 -0.429795 0.902926
+  349.090912 -0.189251 0.981929
+  360.000000 -0.000000 1.000000

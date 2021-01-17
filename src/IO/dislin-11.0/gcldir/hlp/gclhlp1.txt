@@ -1,0 +1,264 @@
+Name: IF      1 
+The IF statement executes a statement  if a  logical expres-
+sion is true. The syntax is:
+
+IF (expr) statement 
+
+Example:
+
+  IF (I < 10) A = 1
+
+IF constructs are statements for decision making. The syntax
+is:
+
+  IF (expression)  
+    statements 
+  ELSE IF (expression) 
+    statements 
+  ELSE 
+    statements 
+  END IF 
+
+If expression is true,  the statements  in the IF block will
+be executed;  if expression is false, control is transferred
+to the next ELSE IF, ELSE or END IF statement. 
+
+Example: 
+
+  IF (A > 0) 
+    ISIGN = 1 
+  ELSE IF (A < 0) 
+    ISIGN = -1 
+  ELSE 
+    ISIGN = 0 
+  END IF
+
+Notes:
+
+ - Up to 8 IF constructs can be nested.
+ - The ELSE IF and ELSE blocks are optional.
+ -  Multiple ELSE IF blocks can be specified.
+
+Name: SWITCH   1
+The  SWITCH  statement is a  multi-way decision  that  tests
+whether  an expression matches one of the number of constant
+integer values. The syntax is:
+
+  SWITCH (iexpr)  
+    CASE n1:
+      statements
+    CASE n2:
+      statements 
+    ..........
+    DEFAULT:
+      statements 
+  END SWITCH
+
+Each case must be labeled by an INT constant while iexpr can
+be an integer expression. If a case matches iexpr, execution
+starts at that case. The case labeled DEFAULT is executed if
+none of the other cases are satisfied.  The  DEFAULT case is
+optional.
+
+The following  example counts the number  of characters  and
+the number of blanks in a string .
+
+  %GCL 
+  S = 'This is a test' 
+  I = 0 
+  NCHAR = 0 
+  NBLANK = 0 
+  WHILE (S[I] != 0) 
+    SWITCH (S[I])
+      CASE 32:
+        NBLANK = NBLANK + 1
+      DEFAULT:
+        NCHAR = NCHAR + 1
+    END SWITCH
+    I = I + 1
+  END WHILE
+
+  PRINT NCHAR, NBLANK
+
+Notes:
+
+ -  Up to 8 SWITCH statements can be nested.
+ -  The  BREAK  statement  causes  an  immediate exit from a
+    SWITCH statement. 
+
+Name: DO   1
+The DO statement can be used to repeat statements a set num-
+ber of times. The syntax is:
+
+  DO v = expr1, expr2 [,expr3] 
+    statements 
+  END DO 
+
+where
+
+  v       is a loop counter.
+  expr1   is an expression that initializes v.
+  expr2   is an expression that defines the end of the  loop
+          range.
+  expr3   is an optional expression  that will be used as an
+          increment  for the loop counter.  The value cannot
+          equal zero. The default value is 1.
+
+The following restrictions apply to DO loops:
+
+ - Up to 8 DO loops can be nested.
+ - Jumping  into  a DO loop  from  outside  its range is not
+   allowed.
+ - Overlapping of DO and IF constructs are not allowed.
+
+Notes:
+
+ - The loop  counter of  a DO loop can be modified by state-
+   ments within the loop.
+ - Whenever possible,  array data should be processed by ar-
+   ray operations  instead  of operations  in a loop.  Array
+   operations are much more faster than loop operations.  
+
+Name: WHILE   1
+A  WHILE  loop  repeats as long as a given condition remains
+true. The syntax is:
+
+  WHILE (expr) 
+    statements 
+  END WHILE
+
+Example:
+
+  I = 0
+  SUM = 0
+  WHILE (I < 10)
+    I = I + 1 
+    SUM = SUM + I 
+  END WHILE
+
+The following restrictions apply to WHILE loops:
+
+ - Up to 8 WHILE loops can be nested.
+ - Jumping into a  WHILE  loop from outside its range is not
+   allowed.
+ - Overlapping of WHILE and IF constructs are not allowed.
+Name: BREAK   1 
+The  BREAK statement causes an immediate exit from a SWITCH,
+DO and WHILE construct. 
+
+Example:
+
+  I = 0 
+  WHILE (I < 10) 
+    I = I + 1 
+    PRINT I 
+    IF (I == 3) BREAK 
+  END WHILE
+
+The output of the example is: 
+
+         1 
+         2 
+         3 
+Note:  The BREAK  statement  ends only the loop  in which it
+       appears.
+Name: CONTINUE   1
+The  CONTINUE  statement  can be used  to skip all following
+statements  in a loop  and to execute the loop with the next
+iteration.
+
+Example:
+
+  DO I = 1, 5 
+    IF (I == 3) CONTINUE 
+    PRINT I 
+  END DO
+
+The output of the example is: 
+
+        1 
+        2 
+        4 
+        5 
+Name: GOTO   1 
+The  GOTO statement makes a jump to another part of the DIS-
+GCL script file. The syntax is: 
+
+GOTO Label 
+
+where  Label  is the name  of a label.  For label names, the
+same rules as for variable names are applied.
+
+The target of the  GOTO  statement must be a label statement
+which has the syntax: 
+
+Label: 
+
+Example:
+
+  I = 0
+  L1: 
+  I = I + 1
+  PRINT I
+  IF (I < 5) GOTO L1
+ 
+The output of the example is: 
+
+         1 
+         2 
+         3 
+         4 
+Name: CALL   1
+The  CALL  statement executes a user-defined subroutine. The
+syntax is:
+
+CALL routine (list) 
+
+where
+
+routine    is the name of the subroutine.
+list       are the actual parameters of the subroutine sepa-
+           rated by commas.
+
+DISGCL adds the extension  '.gcl' to the name of the subrou-
+tine and searches the current directory for the filename. If
+the search fails, DISGCL searches  the directory  defined by
+the environment variable GCL_PATH. 
+Name: SUBROUTINE   1
+The  SUBROUTINE  statement  must  be the  first  non-comment
+statement in a user-defined subroutine (after the identifier
+'%GCL'). It has the syntax:
+
+SUBROUTINE routine (list)
+
+where
+
+routine    is the name of the subroutine.
+list       are the formal parameters of the subroutine sepa-
+           rated by commas.
+Name: FUNCTION  1
+The  FUNCTION statement must be the first non-comment state-
+ment  in  a  user-defined function   (after  the  identifier
+'%GCL'). It has the syntax:
+
+FUNCTION function (list)
+
+where
+
+function   is the name of the function.
+list       are the formal parameters of the function separa-
+           ted by commas.
+Name: EXTERN   1
+The  EXTERN statement can be used to access variables of the
+main DISGCL unit.  These are variables that are defined out-
+side of functions and subroutines. The syntax is:
+
+EXTERN v1, v2, ..., vn  
+
+where v1, v2, ..., vn are the names of variables.
+Name: RETURN  1
+The  RETURN  statement can be used  to exit a subroutine and
+must be used in a function to return a value. The syntax is:
+
+RETURN        for subroutines. 
+RETURN expr   for functions.

@@ -1,0 +1,26 @@
+%GCL
+// World Coastlines and Lakes
+
+METAFL ('CONS')
+DISINI ()
+PAGERA ()
+COMPLX ()
+
+AXSPOS (400, 1850)
+AXSLEN (2400, 1400)
+
+NAME   ('Longitude', 'X')
+NAME   ('Latitude', 'Y')
+TITLIN ('World Coastlines and Lakes', 3)
+
+LABELS ('MAP', 'XY')
+GRAFMP (-180.,180.,-180.,90.,-90.,90.,-90.,30.)
+
+GRIDMP (1, 1)
+COLOR  ('GREEN')
+WORLD  ()
+COLOR  ('FORE')
+
+HEIGHT (50)
+TITLE  ()
+DISFIN ()

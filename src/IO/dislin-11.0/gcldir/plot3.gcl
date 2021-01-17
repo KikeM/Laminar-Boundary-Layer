@@ -1,0 +1,137 @@
+%GCL
+// Quickplot command PLOT3 with Widget Interface
+int iray[10]
+
+dsp = getdsp ()
+if (dsp == "NOXW")
+  print ">>>> No X Window terminal"
+  exit
+end if
+
+include "plot3.ini"
+
+cxmin   = numtoa (%xmin , 1)
+cxmax   = numtoa (%xmax , 1)
+cxor    = numtoa (%xor  , 1)
+cxstp   = numtoa (%xstep, 1)
+
+cymin   = numtoa (%ymin , 1)
+cymax   = numtoa (%ymax , 1)
+cyor    = numtoa (%yor  , 1)
+cystp   = numtoa (%ystep, 1)
+
+czmin   = numtoa (%zmin , 1)
+czmax   = numtoa (%zmax , 1)
+czor    = numtoa (%zor  , 1)
+czstp   = numtoa (%zstep, 1)
+
+cxcol   = numtoa (nxcol, -1)
+cycol   = numtoa (nycol, -1)
+czcol   = numtoa (nzcol, -1)
+
+cblock  = numtoa (nblock, -1)
+
+ixscl = 0
+iyscl = 0
+izscl = 0
+if (%xscl == 'LOG') ixscl = 1
+if (%yscl == 'LOG') iyscl = 1
+if (%zscl == 'LOG') izscl = 1
+
+cxres   = numtoa (%xres, -1)
+cyres   = numtoa (%yres, -1)
+
+idev    = 1
+irev    = 0
+
+swghlp ("The GCL script PLOT3 is a widget interface|for the GCL command PLOT3")
+swgtit ("PLOT3")
+swgpop ("NOOK")
+
+ip_ini  = wgini ("hori")
+ip1     = wgbas (ip_ini, "vert")
+ip2     = wgbas (ip_ini, "vert")
+ip3     = wgbas (ip_ini, "vert")
+ip4     = wgbas (ip_ini, "vert")
+
+id      = wglab (ip1, "Data File:")                  // Data File
+id_file = wgfil (ip1, "Data File", cdata, "*.gdf") 
+
+id      = wglab (ip1, " ")                           // Device
+id      = wglab (ip1, "Device:")                      
+id_lis  = wglis (ip1, "Screen|Full Screen|PostScript", idev)
+
+id      = wglab (ip1, " ")                           // Scaling
+id      = wglab (ip1, "Scaling:")      
+              
+id_but1 = wgbut (ip1, "User-def. X-scaling", 1 - %xauto)  // Scaling X-axis
+id_but2 = wgbut (ip1, "User-def. Y-scaling", 1 - %yauto)  // Scaling Y-axis
+id_but3 = wgbut (ip1, "User-def. Z-scaling", 1 - %zauto)  // Scaling Y-axis
+
+id      = wglab (ip1, " ")                     
+id      = wglab (ip1, "Linear/Log Axis Scaling")
+id_but4 = wgbut (ip1, "Log. X-axis", ixscl)          // Scaling X-axis
+id_but5 = wgbut (ip1, "Log. Y-axis", iyscl)          // Scaling Y-axis
+id_but6 = wgbut (ip1, "Log. Z-axis", izscl)          // Scaling Y-axis
+
+id      = wglab (ip1, " ")                     
+id_but7 = wgbut (ip1, "Reverse Screen", irev)
+
+id      = wglab (ip2, "Column Selection:")           // Data File Columns
+id_xcol = wgltxt (ip2, "X-Column:", cxcol, 35)
+id_ycol = wgltxt (ip2, "Y-Column:", cycol, 35)
+id_zcol = wgltxt (ip2, "Z-Column:", czcol, 35)
+
+id      = wglab (ip2, " ") 
+id      = wglab (ip2, "Data Block Selection:")      // Data File Block
+id_block = wgltxt (ip2, "Data Block:", cblock, 35)
+
+id      = wglab (ip2, " ") 
+id      = wglab (ip2, "Point Size Selection:")      // Data File Block
+id_xres = wgltxt (ip2, "Width:", cxres, 35)
+id_yres = wgltxt (ip2, "Height:", cyres, 35)
+
+id      = wglab (ip2, " ") 
+id      = wglab (ip2, " ") 
+id      = wglab (ip2, "User-def. X-Scaling:")      // Axis system scaling
+id_xmin = wgltxt (ip2, "X-Minimum", cxmin, 35)
+id_xmax = wgltxt (ip2, "X-Maximum", cxmax, 35)
+
+id_xor  = wgltxt (ip3, "X-Origin",  cxor,  35)
+id_xstp = wgltxt (ip3, "X-Step",    cxstp, 35)
+
+id      = wglab (ip3, " ") 
+id      = wglab (ip3, "User-def. Y-Scaling:")      // Axis system scaling
+id_ymin = wgltxt (ip3, "Y-Minimum", cymin, 35)
+id_ymax = wgltxt (ip3, "Y-Maximum", cymax, 35)
+id_yor  = wgltxt (ip3, "Y-Origin",  cyor,  35)
+id_ystp = wgltxt (ip3, "Y-Step",    cystp, 35)
+
+id      = wglab (ip3, " ") 
+id      = wglab (ip3, "User-def. Z-Scaling:")      // Axis system scaling
+id_zmin = wgltxt (ip3, "Z-Minimum", czmin, 35)
+id_zmax = wgltxt (ip3, "Z-Maximum", czmax, 35)
+id_zor  = wgltxt (ip3, "Z-Origin",  czor,  35)
+id_zstp = wgltxt (ip3, "Z-Step",    czstp, 35)
+
+id      = wglab (ip4, "Title:")          // Title
+id_tit1 = wgtxt (ip4, %t1)
+id_tit2 = wgtxt (ip4, %t2)
+id_tit3 = wgtxt (ip4, %t3)
+id_tit4 = wgtxt (ip4, %t4)
+
+id      = wglab (ip4, " ")                // X-axis Title
+id      = wglab (ip4, "X-Title:") 
+id_xtit = wgtxt (ip4, %x)
+
+id      = wglab (ip4, "Y-Title:") 
+id_ytit = wgtxt (ip4, %y)
+
+id      = wglab (ip4, "Z-Title:") 
+id_ztit = wgtxt (ip4, %z)
+
+id      = wglab (ip4, " ") 
+id_pbut = wgpbut (ip4, "OK")
+swgcb (id_pbut, 'plot3cb', iray)
+id      = wgquit(ip4)
+wgfin ()

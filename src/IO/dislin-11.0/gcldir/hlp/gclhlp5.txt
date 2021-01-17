@@ -1,0 +1,336 @@
+Name: PRINTF  5
+The function  PRINTF  translates internal values  and prints
+them on the screen.
+The call is:    ISTAT = PRINTF (CFMT, ARG1, ARG2, ..., ARGn)
+CFMT            is a format string.
+ARG1, .., ARGn  are optional arguments.
+ISTAT           is  the  returned status of  PRINTF  and can
+                have the values 0 and -1.  On error,  PRINTF
+                returns -1. 
+
+The format string can contain ordinary characters and format
+specifications.  Ordinary  characters  are  printed  as text
+while  format  specifications  define how  the  arguments of
+PRINTF are formatted. A format specification begins with a %
+and ends with a conversion character.  Between the % and the 
+conversion character there may be the following parts:
+
+ - A minus sign, which specifies left adjustment.
+ - A number that specifies the minimum field length.
+ - A perid,  which separates the field width from the preci-
+   sion.
+ - A number  that  specifies  the precision.  It defines the
+   number of printed charcters from a string,  or the number
+   of digits after  the decimal point  of floating point va-
+   lues.
+ 
+Conversion characters are shown in the following table:
+
+  --------------------------------------------------
+  | Character |             Meaning                |
+  --------------------------------------------------
+  |    %c     | prints a character.                | 
+  |    %d     | prints an integer.                 |
+  |    %i     | prints an integer (same as %d).    | 
+  |    %s     | prints a string.                   |
+  |    %f     | prints a floating point number.    | 
+  |    %e     | prints a floating point number in  |
+  |           | e format.                          | 
+  |    %x     | prints an integer in hexadecimal   |
+  |           | format.                            |
+  |    %o     | prints an integer in octal format. |
+  |    \n     | inserts a newline.                 |
+  --------------------------------------------------
+          Figure 9.1: Conversion Characters
+
+Examples:
+
+The first example shows the effect of some format specifica-
+tions for printing the string  'This is a string.'  (17 cha-
+racters).
+
+   %GCL
+
+   s = 'This is a string.'
+   printf (':%s:      \n', s)
+   printf (':%15s:    \n', s)
+   printf (':%17s:    \n', s)
+   printf (':%20s:    \n', s)
+   printf (':%-20s:   \n', s)
+   printf (':%17.13s: \n', s)
+   printf (':%-17.13s:\n', s)
+
+The output of the DISGCL script is:
+
+   :This is a string.:      
+   :This is a string.:    
+   :This is a string.:    
+   :   This is a string.:    
+   :This is a string.   :   
+   :    This is a str: 
+   :This is a str    :
+
+The next  example shows the effect of some format specifica-
+tions for printing the integer 254:
+
+   %GCL
+
+   i = 254
+   printf (':%d:    \n', i)
+   printf (':%8d:   \n', i)
+   printf (':%08d:  \n', i)
+   printf (':%-8d:  \n', i)
+   printf (':%-8.2d:\n', i)
+   printf (':%x:    \n', i)
+   printf (':%08X:  \n', i)
+   printf (':%o:    \n', i)
+
+   The output is:
+
+   :254:    
+   :     254:   
+   :00000254:  
+   :254     :  
+   :254     :
+   :fe:    
+   :000000FE:
+   :376:
+
+The next  example shows the effect of some format specifica-
+tions for printing the floating point number 123.456:
+
+   %GCL
+
+   x = 123.456
+   printf (':%f:      \n', x)
+   printf (':%15f:    \n', x)
+   printf (':%-15f:   \n', x)
+   printf (':%-15.2f: \n', x)
+   printf (':%e:      \n', x)
+   printf (':%-15E:   \n', x)
+   printf (':%-15.2E: \n', x)
+
+   The output is:
+
+   :123.456000:      
+   :     123.456000:    
+   :123.456000     :   
+   :123.46         : 
+   :1.234560e+02:      
+   :1.234560E+02   :   
+   :1.23E+02       : 
+
+Name: SPRINTF  5
+The function  SPRINTF  does the  same conversions  as PRINTF
+does, but stores the output in a character array.
+The call is:  ISTAT = SPRINTF (CRAY, CFMT, ARG1, ARG2, ..., 
+                                                       ARGn)
+CRAY          is a character array that must be created with
+              the  CHAR command.  CRAY must be big enough to
+              hold the result and the string terminator.
+CFMT          is a format string (see PRINTF).
+ARG1,..,ARGn  are optional arguments.
+ISTAT         is the returned status of SPRINTF and can have
+              the values 0 and -1. On error, SPRINTF returns
+              -1. 
+Name: SCANF   5
+The function  SCANF is an analog function to PRINTF for for-
+matted input from the keyboard.  It uses the format specifi-
+cations listed in table 9.1 (see PRINTF).
+The call is:  ISTAT = SCANF (NU, CFMT, ARG1, ARG2,..., ARGn)
+NU            is a file unit.
+CFMT          is a format string.
+ARG1,..,ARGn  are  optional  arguments  where  the arguments
+              must be variables. If a string should be read,
+              the corresponding  variable  must  be  created
+              with the DISGCL command CHAR and big enough to
+              hold the string and a trailing string termina-
+              tor.   
+ISTAT         is the returned status of  SCANF  and can have
+              the  values 0 and -1.  On error, SCANF returns
+              -1. 
+Note:         SCANF cannot  be used in the  interactive mode
+              of DISGCL.
+Name: SSCANF  5
+The function SSCANF does the same conversions as SCANF does,
+but reads the input from a string.
+The call is:  ISTAT = SSCANF (CSTR, CFMT, ARG1, ARG2, ..., 
+                                                       ARGn)
+CSTR          is a string where the input characters are ta-
+              ken from.
+CFMT          is a format string.
+ARG1,..,ARGn  are optional arguments (see SCANF).
+ISTAT         is the returned status of  SSCANF and can have
+              the values 0 and -1.  On error, SSCANF returns
+              -1. 
+Name: FOPEN   5
+The routine FOPEN opens a file and returns a file unit.
+The call is:  NU = FOPEN (CFIL, CMOD)
+CFIL          is the name of a file.  If CFIL = 'CON:',  the
+              console is opened  for file I/O.  If DISGCL is
+              used in interactive mode, the console can only
+              be opened for output (CMOD = 'w').
+CMOD          is a string that defines the mode for file ac-
+              cess. The modes are listed in table 9.2.
+NU            is the returned file unit,  or -1  if an error
+              occurs.
+
+The following table shows the allowed file modes for FOPEN:
+
+  --------------------------------------------------------
+  |  Mode  |             Meaning                         |
+  --------------------------------------------------------
+  |  'r'   | opens a text file for reading. The file     |
+  |        | must exist, or an error message is printed. | 
+  |  'w'   | opens a text file for writing. The contents | 
+  |        | of an existing file will be overwritten.    |
+  |  'a'   | opens a text file for appending.            |
+  |  'rb'  | opens a file for binary reading.            |
+  |  'wb'  | opens a file for binary writing.            |
+  |  'ab'  | opens a file for binary appending.          |
+  --------------------------------------------------------
+            Figure 9.2: File Modes for FOPEN
+
+Name: FCLOSE  5
+The function FCLOSE closes a file.
+The call is:  ISTAT = FCLOSE (NU)
+NU            is a file unit.
+ISTAT         is the returned status of  FCLOSE and can have
+              the values 0 and -1.  On error, FCLOSE returns
+              -1. 
+Name: REMOVE  5 
+The function REMOVE deletes a file.
+The call is:  ISTAT = REMOVE (CFIL)
+CFIL          is the name of a file. 
+ISTAT         is the returned status of REMOVE  and can have
+              the values 0 and -1.  On error, REMOVE returns
+              -1. 
+Name: RENAME  5
+The function RENAME changes the name of a file.
+The call is:  ISTAT = RENAME (COLD, CNEW)
+COLD          is the old name of the file. 
+CNEW          is the new name of the file. 
+ISTAT         is the returned status of  RENAME and can have
+              the values 0 and -1.  On error, RENAME returns
+              -1. 
+Name: FTELL   5 
+The function FTELL returns the current file position.
+The call is:  NPOS = FTELL (NU)
+NU            is a file unit.
+NPOS          is the returned file position, or -1 on error.
+Name: FSEEK   5 
+The function FSEEK defines the current file position.
+The call is:  ISTAT = FSEEK (NU, NPOS)
+NU            is a file unit.
+NPOS          is the new file position.
+ISTAT         is the returned status of  FSEEK  and can have
+              the  values 0 and -1.  On error, FSEEK returns
+              -1. 
+Name: FFLUSH 
+The function  FFLUSH  flushes any output buffers. For input,
+FFLUSH has no effect.
+The call is:  ISTAT = FFLUSH (NU)
+NU            is a file unit.
+ISTAT         is the returned status of  FFLUSH and can have
+              the values 0 and -1.  On error, FFLUSH returns
+              -1. 
+Name: REWIND  5
+The function  REWIND  sets the current  file position to the
+beginning of the file.
+The call is:  ISTAT = REWIND (NU)
+NU            is a file unit.
+ISTAT         is the returned status of  REWIND and can have
+              the values 0 and -1.  On error, REWIND returns
+              -1. 
+Name: FPRINTF 5  
+The function  FPRINTF  does the same  conversions as  PRINTF
+does, but writes the output to a file.
+The call is:  ISTAT = FPRINTF (NU, CFMT, ARG1, ARG2, ..., 
+                                                       ARGn)
+NU            is a file unit.
+CFMT          is a format string.
+ARG1,..,ARGn  are optional arguments.
+ISTAT         is the returned status of FPRINTF and can have
+              the values 0 and -1. On error, FPRINTF returns
+              -1. 
+Name: FSCANF  5 
+The function  FSCANF  is an analog function to  FPRINTF  for
+formatted input. It uses the format specifications listed in
+table 9.1 (see PRINTF).
+The call is:  ISTAT = FSCANF (NU, CFMT, ARG1, ARG2, ...,
+                                                       ARGn)
+NU            is a file unit.
+CFMT          is a format string.
+ARG1,..,ARGn  are  optional  arguments  where  the arguments
+              must be variables.  If a string should be read
+              from the file, the corresponding variable must
+              be created with the  DISGCL  command  CHAR and
+              big enough to hold the string and the trailing
+              string terminator.   
+ISTAT         is the returned status of  FSCANF and can have
+              the values 0 and -1.  On error, FSCANF returns
+              -1. 
+Name: FGETC   5 
+The function FGETC returns the next character from a file.
+The call is:  N = FGETC (NU)
+NU            is a file unit.
+N             is the ASCII  code of the  returned character,
+              or -1 if end of file or error occurs.
+Name: FGETS   5
+The function  FGETS reads at most N-1 characters into a cha-
+racter array, stopping if a newline is encountered. The new-
+line character is included in the character array. 
+The call is:  ISTAT = FGETS (CRAY, N, NU)
+CRAY          is a  character array  filled by  FGETS.  CRAY
+              must be created  with the DISGCL  command CHAR
+              (i.e. CHAR CRAY[N]).
+N             defines  the number  of characters to be read.
+              At most N-1 characters will be read.
+NU            is a file unit.
+ISTAT         is the  returned status of  FGETS and can have
+              the  values  0 and -1. FGETS returns -1 if end
+              of file or error occurs. 
+Note:         The function  GETS (CRAY, N)  reads a most N-1
+              characters from the keyboard  into the charac-
+              ter array CRAY.
+Name: FPUTC   5
+The function FPUTC writes a character to a file.
+The call is:  ISTAT = FPUTC (N, NU)
+N             is the  ASCII  code of a character that should
+              be written to a file.
+NU            is a file unit.
+ISTAT         is the returned status of  FPUTC  and can have
+              the  values 0 and -1.  On error, FPUTC returns
+              -1. 
+Name: FPUTS   5
+The function FPUTS writes a string to a file.
+The call is:  ISTAT = FPUTS (CSTR, NU)
+CSTR          is a string  that  should  be  written  to the
+              file.  A newline  character  is inserted after
+              the string.
+NU            is a file unit.
+ISTAT         is the returned status of  FPUTS  and can have
+              the  values 0 and -1.  On error, FPUTS returns
+              -1. 
+Note:         The function  PUTS (CSTR)  prints  the  string
+              CSTR on the console.
+Name: FREAD   5
+The function FREAD reads binary data from a file.
+The call is:  NRET = FREAD (VRAY, N, NU)
+VRAY          is an array  where  the binary  data should be
+              filled in.
+N             is the number of array elements that should be
+              filled with data.
+NU            is a file unit.
+NRET          is the number  of elements read,  or -1 if end
+              of file or error occurs.
+Name: FWRITE  5 
+The function FWRITE writes binary data to a file.
+The call is:  NRET = FWRITE (VRAY, N, NU)
+VRAY          is an array containing the data that should be
+              written to the file.
+N             is the number of array elements that should be
+              written to the file.
+NU            is a file unit.
+NRET          is the number  of elements  written,  or -1 if
+              error occurs.

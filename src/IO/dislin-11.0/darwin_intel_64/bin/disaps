@@ -1,0 +1,6 @@
+#!/bin/sh
+if test $# -eq 0 ; then
+  disaps_w 
+else
+  disaps_x "$@"
+fi

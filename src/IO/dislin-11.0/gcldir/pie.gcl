@@ -1,0 +1,41 @@
+%GCL
+// Pie Charts (PIEGRF)
+
+n = 5
+xray = {1.0, 2.5, 2.0, 2.7, 1.8}
+
+setpag ('da4p')
+metafl ('cons')
+disini ()
+pagera ()
+complx ()
+axslen (1600,1000)
+titlin ('Pie Charts (PIEGRF)', 2)
+chnpie ('both')
+
+legini (cbuf, 5, 8)
+leglin (cbuf, 'FIRST',  1)
+leglin (cbuf, 'SECOND', 2)
+leglin (cbuf, 'THIRD',  3)
+leglin (cbuf, 'FOURTH', 4)
+leglin (cbuf, 'FIFTH',  5)
+
+patcyc (1, 7)
+patcyc (2, 4)
+patcyc (3, 13)
+patcyc (4, 3)
+patcyc (5, 5)
+
+axspos (250, 2800)
+piegrf (cbuf, 1, xray, n)
+endgrf ()
+
+axspos (250, 1600)
+labels ('data', 'pie')
+labpos ('external', 'pie')
+piegrf (cbuf, 1, xray, n)
+
+height (50)
+title  ()
+
+disfin ()

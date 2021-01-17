@@ -1,0 +1,170 @@
+    Chapter 6: User-defined Subroutines and Functions 
+  ------------------------------------------------------
+
+User-defined subroutines  and functions can be used to break
+large DISGCL tasks into several parts.
+
+Subroutines and functions offer some advantages:
+
+ - They use local variables  and labels that are not visible 
+   to other parts of the DISGCL task.
+ - They make debugging easier.  Once the subroutine or func-
+   tion is tested, it can be used in many other DISGCL runs.
+ - They eleminate repetition of code.
+
+Each user-defined subroutine or function must be stored in a
+file  with the extension  '.gcl'  where the name of the file
+and  the name  of the routine  must be identical.  The first
+statement in the file must be the DISGCL identifier '%GCL'.
+The next non-comment statement  in the file should be either
+the SUBROUTINE or the FUNCTION statement. Functions and sub-
+routines are terminated with the first  END  statement  that
+should be the last statement in the file.
+
+6.1 Calling User-defined Subroutines
+
+The  CALL  statement executes a user-defined subroutine. The
+syntax is:
+
+CALL routine (list) 
+
+where
+
+routine    is the name of the subroutine.
+list       are the actual parameters of the subroutine sepa-
+           rated by commas.
+
+DISGCL adds the extension  '.gcl' to the name of the subrou-
+tine and searches the current directory for the filename. If
+the search fails, DISGCL searches  the directory  defined by
+the environment variable GCL_PATH. 
+
+6.2 Calling User-defined Functions
+
+A user-defined  function is called in the same way as a DIS-
+LIN and DISGCL function. The syntax is: 
+
+v = function (list) 
+
+where
+
+function   is the name of the function.
+list       are the  parameters  of the function separated by
+           commas.
+
+The search order for functions is:
+
+   1.  DISLIN functions.
+   2.  DISGCL functions.
+   3.  User-defined functions.
+
+If the search for a DISLIN and DISGCL function fails, DISGCL
+adds the extension '.gcl'  to the name  of the function  and
+searches the  current  directory  for the  filename.  If the
+search also fails, DISGCL searches the directory  defined by
+the environment variable GCL_PATH. 
+
+6.3 The SUBROUTINE Statement
+
+The  SUBROUTINE  statement  must  be the  first  non-comment
+statement in a user-defined subroutine (after the identifier
+'%GCL'). It has the syntax:
+
+SUBROUTINE routine (list)
+
+where
+
+routine    is the name of the subroutine.
+list       are the formal parameters of the subroutine sepa-
+           rated by commas.
+
+6.4 The FUNCTION Statement
+
+The  FUNCTION statement must be the first non-comment state-
+ment  in  a  user-defined function   (after  the  identifier
+'%GCL'). It has the syntax:
+
+FUNCTION function (list)
+
+where
+
+function   is the name of the function.
+list       are the formal parameters of the function separa-
+           ted by commas.
+
+6.5 The EXTERN Statement
+
+The  EXTERN statement can be used to access variables of the
+main DISGCL unit.  These are variables that are defined out-
+side of functions and subroutines. The syntax is:
+
+EXTERN v1, v2, ..., vn  
+
+where v1, v2, ..., vn are the names of variables.
+
+6.6 The RETURN Statement
+
+The  RETURN  statement can be used  to exit a subroutine and
+must be used in a function to return a value. The syntax is:
+
+RETURN        for subroutines. 
+RETURN expr   for functions.
+
+6.7 Parameters
+
+Variables  and  expressions  can be passed  as parameters to
+user-defined  functions  and subroutines.  Parameters in the
+CALL statement of a subroutine or in the  function reference
+are called actual paramters. Formal parameters are the para-
+meters declared in the SUBROUTINE or FUNCTION statement.
+
+A formal parameter has the syntax:
+
+[type:][key=]name
+ 
+where
+
+type    is an optional type declaration of the parameter. It
+        can have the keywords BYTE, CHAR, SHORT, INT, FLOAT,
+        DOUBLE, COMPLEX and STRING. If a type declaration is
+        specified, DISGCL compares automatically the type of
+        actual and formal parameters.
+key     is an optional keyword  for the parameter that iden-
+        tifies which parameter is being passed.
+name    is the formal name of the parameter. The name of the
+        parameter  can have a  dimension  specification that
+        means that the actual parameter must be an array.
+
+Example:
+
+SUBROUTINE MYSUB (FLOAT: A, INT: N, FLOAT: DATA=X[])
+
+An actual parameter has the syntax:
+
+[key=]expr 
+ 
+where
+
+key     is an optional keyword for the parameter.
+expr    is an expression.
+  
+Example:
+
+CALL MYSUB (3., 10, DATA=XRAY)
+
+Notes:
+
+ - The number  of actual parameters  can be  lower  than the
+   number  of  formal  parameters.  The  function   ARGCNT()
+   returns the total  number of parameters passed  to a sub-
+   routine or function.  The function  KEYCNT () returns the
+   number of  keyword parameters  passed to a  subroutine or
+   function.   The functions   VARDEF (x),  VARTYP (x), VAR-
+   CNT (x)  and VARDIM (x, n) can be used to analyse  passed
+   parameters (see Appendix A).  
+
+ - If the number  of  actual parameters  is greater than the
+   number of formal parameters, or a keyword is used that is
+   not defined in the formal parameter list, DISGCL displays
+   a warning and ignores the routine call.
+

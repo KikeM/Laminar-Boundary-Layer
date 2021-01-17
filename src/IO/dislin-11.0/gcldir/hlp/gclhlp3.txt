@@ -1,0 +1,107 @@
+Name: PLOT    3
+The command  PLOT makes a quickplot of two or more floating-
+point arrays.
+The call is:  PLOT  xray1, yray1 [,xray2, yray2, ... ,
+                                               xrayn, yrayn]
+xray1, yray1  are floating point arrays.
+
+Example:      x = falloc (100) 
+              plot x, sin (x), x, cos (x) 
+Name: SCATTR  3
+The  command  SCATTR  makes  a  quickplot  of  two  or  more
+floating point arrays where the points  are marked with sym-
+bols.
+The call is:  SCATTR  xray1, yray1 [,xray2, yray2, ... ,
+                                               xrayn, yrayn]
+xray1, yray1  are floating point arrays.
+Name: PLOT3   3
+The command PLOT3 makes a 3-D colour plot.
+The call is:  PLOT3 xray, yray, zray
+xray, yray,   are floating point arrays  containing  X-,  Y- 
+       zray   and Z-coordinates.
+Name: PLOT3R  3
+The command  PLOT3R  makes a 3-D colour plot  where the data
+are specified as rectangles.
+The call is:  PLOT3R x1ray,  y1ray, x2ray,  y2ray,  zray
+x1ray, y1ray  are floating point arrays containing X- and Y-
+              coordinates of rectangle corners.
+x2ray, y2ray  are floating point arrays containing the oppo-
+              site rectangle corners.
+zray          is a floating point array containing Z-coordi-
+              nates.
+Name: SURF3   3
+The command  SURF3  makes a 3-D colour plot of a matrix. The
+columns of the matrix will be plotted as rows. 
+The call is:  SURF3  zmat [,xray [, yray]]
+zmat          is a two-dimensional floating point array with
+              m rows and n columns.
+xray          is a  floating point  array with the dimension
+              m.  It will be used  to position  the  rows of
+              zmat.  If  xray is  missing, an array with the
+              values { 0.5, 1.5, ..., m - 0.5} will be used.
+yray          is a floating point array  with the  dimension
+              n. It will be used to position  the columns of
+              zmat.  If yray  is missing,  an array with the
+              values { 0.5, 1.5, ..., n - 0.5} will be used.
+Name: SURFACE 3
+The command SURFACE makes a surface plot of a matrix. 
+The call is:  SURFACE zmat [,xray, yray]
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a  floating point array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is  missing,  an array with the
+              values {0., 1., ..., nx - 1} will be used.
+yray          is a floating point  array with the  dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray is missing,  an array  with the
+              values {0., 1., ..., ny - 1} will be used.
+Name: SURSHADE 3
+The command SURSHADE makes a shaded surface plot of a matrix. 
+The call is:  SURSHADE zmat [,xray, yray]
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a floating point  array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is  missing,  an array with the
+              values {0., 1., ..., nx - 1} will be used.
+yray          is a  floating point array with the  dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray is missing,  an array  with the
+              values {0., 1., ..., ny - 1} will be used.
+Name: CONTOUR 3
+The command CONTOUR makes a contour plot of a matrix. 
+The call is:  CONTOUR zmat [,xray, yray, zlvray]
+         or:  CONTOUR zmat, zlvray
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a  floating point array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is  missing,  an array with the
+              values {0., 1., ..., nx - 1} will be used.
+yray          is a  floating point array with the  dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray is missing,  an array  with the
+              values {0., 1., ..., ny - 1} will be used.
+zlvray        is a  floating point array containing  the le-
+              vels. If zlvray is missing,  10 levels between
+              the minimum and maximum of zmat  will be gene-
+              rated.
+Name: CONSHADE 3
+The command CONSHADE makes a shaded contour plot of a matrix. 
+The call is:  CONSHADE zmat [,xray, yray, zlvray]
+         or:  CONSHADE zmat, zlvray
+zmat          is a two-dimensional floating point array with
+              nx rows and ny columns.
+xray          is a  floating point array  with the dimension 
+              nx.  It will be used  to position  the rows of
+              zmat.  If xray is  missing,  an array with the
+              values {0., 1., ..., nx - 1} will be used.
+yray          is a  floating point array with the  dimension
+              ny. It will be used to position the columns of
+              zmat.  If yray is missing,  an array  with the
+              values {0., 1., ..., ny - 1} will be used.
+zlvray        is a  floating point array containing  the le-
+              vels. If zlvray is missing,  10 levels between
+              the minimum and maximum of zmat  will be gene-
+              rated.

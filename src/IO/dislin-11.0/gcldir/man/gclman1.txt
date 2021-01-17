@@ -1,0 +1,243 @@
+               Chapter 1: Overview, DISGCL / 11.0
+           ----------------------------------------
+
+1.1 Introduction
+
+This manual  describes  the graphics command language DISGCL 
+which is an interpreter  based on the graphics software DIS-
+LIN. All DISLIN statements  can be written to a  script file
+and then be executed with DISGCL,  or can be  entered  in an
+interactive mode.
+
+Similar to  programming  languages  such  as Fortran  and C,
+high-level  language elements can be used  within DISGCL.
+These are variables, operators, expressions,  array operati-
+ons, loops, if and switch statements,  user-defined  subrou-
+tines and functions, and file I/O routines.
+
+An easy to use interface for data input  is given to include
+data into  DISGCL jobs.  The format  of data  files  is very
+simple and useful for most DISLIN plotting routines.
+
+Several quickplots are offered by DISGCL which are collecti-
+ons of DISLIN statements to display data with one command.
+
+1.2 Syntax of the Command DISGCL
+
+Command:    disgcl   [filename[.gcl]]   [args]   [options]  
+
+filename    is  the  name  of  a  script file. The extension 
+            '.gcl' is optional.
+
+args        are optional arguments that can be passed to GCL 
+            scripts.  The arguments are stored in the system
+            variables  %ARG1,  %ARG2, ..., %ARGn,  or can be
+            requested with the function GETARG (i), 
+            1 <= i <= n.  The number of passed arguments  is
+            stored in the system variable %NARGS.
+
+options     is an optional  field  of keywords  separated by
+            blanks:
+
+-D=device   defines  the  format of the metafile  created by
+            DISLIN.  This parameter  will overwrite the key-
+            word in the DISLIN routine  METAFL  and can have
+            the same values as the parameter in METAFL.
+
+-F=file     defines the file used for data input. This para-
+            meter  will overwrite  the file parameter in the
+            routine DATFIL.
+
+-I=file     replaces the file parameter of the first INCLUDE
+            statement in an DISGCL script file.  This option
+            can be used  to initialize  variables  with dif-
+            ferent values.
+
+-f          means that the extension '.gcl' is not  added to
+            the filename.
+
+-o          opens an ouput window on Windows systems.
+ 
+-v          prints program version and author.
+
+
+Notes:
+
+ - If no parameters  are specified,  DISGCL runs in interac-
+   tive mode.
+
+ - DISGCL searches  the current  working  directory  for the 
+   script file.  If the search fails,  DISGCL  searches  the
+   directory defined by the environment variable GCL_PATH.
+
+ - On  UNIX systems,  an DISGCL  script file can be executed
+   directly  if the following line is included at the begin-
+   ning of the script file:
+
+   #! /path/disgcl -f
+
+   where path is the directory containing the disgcl execut-
+   able. 
+
+1.3 Syntax of DISGCL Script Files
+
+DISGCL script files must have the following syntax.
+
+ -  A script file must begin with the string %GCL.
+
+ -  Each line may contain up to 132 characters.
+
+ -  The current statement  can be continued on the next line
+    if a masterspace (@) is used at the end of the line.
+
+ -  Lines are allowed to carry trailing comment fields, fol-
+    lowing a double slash (//)  or the '#' character.  Empty 
+    lines are also be interpreted as comment lines.
+
+ -  Keywords and routine names can be in upper and lowercase
+    letters.
+
+ -  String constants  must be  enclosed in a pair  of either
+    apostrophes or quotation marks. 
+
+Example:
+
+  %GCL
+  SUM = 0
+  DO I = 1, 10 
+    SUM = SUM + I 
+  END DO 
+  PRINT SUM 
+
+1.4 Syntax of Statements
+
+The following statements  can be used in DISGCL script files
+or can be typed directly at the DISGCL prompt.
+
+ -----------------------------------------------------------
+ | %GCL                       | Identifier for GCL script  |
+ |                            | files.                     |
+ -----------------------------------------------------------
+ | //Comment or #Comment      | Comment line and inline    |
+ |                            | comments.                  |
+ -----------------------------------------------------------
+ | routine (parameter list)   | Call of a DISLIN or DISGCL |
+ |                            | routine.                   |
+ -----------------------------------------------------------
+ | CALL routine (list)        | Call of a user-defined     |
+ |                            | subroutine.                |
+ -----------------------------------------------------------
+ | v = function (parameter    | Call of a DISLIN, DISGCL   |
+ |                   list)    | or user-defined function.  |
+ -----------------------------------------------------------
+ | v = expression             | Assigns the value of the   |
+ |                            | expression to the variable |
+ |                            | v.                         |     
+ -----------------------------------------------------------
+ | command  [parameter list]  | DISGCL command.            |
+ |                            |                            |
+ -----------------------------------------------------------
+ | vray = { constant list }   | Creates and initializes an |
+ |                            | integer or floating point  |
+ |                            | array.                     |
+ -----------------------------------------------------------
+ | IF (expression) statement  | IF statement (conditional  |
+ |                            | statement).                |
+ -----------------------------------------------------------
+ | IF (expression)            | IF construct. Up to 8 IF   |
+ |   statements               | constructs can be nested.  |
+ | ELSE IF (expression)       | The ELSE IF and the ELSE   |
+ |   statements               | parts are optional.        |
+ | ELSE                       |                            |
+ |   statements               |                            |
+ | END IF                     |                            |
+ -----------------------------------------------------------
+ | DO v = expr1, expr2        | DO loop. Up to 8 loops can |
+ |                [,expr3]    | be nested.                 | 
+ |   statements               |                            |
+ | END DO                     |                            |
+ -----------------------------------------------------------
+ | WHILE (expr)               | WHILE loop. Up to 8 loops  |
+ |   statements               | can be nested.             |
+ | END WHILE                  |                            |
+ -----------------------------------------------------------
+ | SWITCH (iexpr)             | SWITCH statement where     |   
+ |   CASE n1:                 | iexpr must be an integer   |
+ |     statements             | expression and n1, n2, ... |
+ |   CASE n2:                 | integer constants.         |
+ |     statements             | Up to 8 SWITCH statements  |
+ |   ......                   | can be nested.             |
+ |   DEFAULT:                 |                            |
+ |     statements             |                            |
+ | END SWITCH                 |                            |
+ -----------------------------------------------------------
+ | label:                     | Label statement.           |
+ -----------------------------------------------------------
+ | GOTO label                 | GOTO statement.            |
+ -----------------------------------------------------------
+ | $command                   | Executes a system command. |
+ -----------------------------------------------------------
+               Figure 1.1: DISGCL Statements
+
+
+1.5 Data Types
+
+Variables in DISGCL are dynamic. They  don't  have to be de-
+clared,  and they can change their types during the lifetime
+of a GCL session. The following data types are known by DIS-
+GCL:
+
+CHAR       an 8-bit integer in the range -128 to 127.
+
+BYTE       an 8-bit integer in the range 0 to 255.
+
+SHORT      an 16-bit integer in the range -32768 to 32767.
+
+INT        an 32-bit integer in the range -2147483648 to
+           2147483647.
+
+FLOAT      an  32-bit floating point  number  in  the  range
+           1.2E-38 to 3.4E+38 and with 7-digit precision.
+
+DOUBLE     an  64-bit floating point  number  in  the  range
+           2.2E-308 to 1.8E+308 and with 15-digit precision.
+
+COMPLEX    a pair  of 32-bit floating point  numbers  in the
+           range 1.2E-38 to 3.4E+38.
+
+STRING     a sequence  of characters.  Strings are stored as
+           CHAR arrays terminated with the ASCII value zero.
+
+1.6 Expressions
+
+An expression  is an combination of operands  and operators.
+The operands can be constants, variables and functions,  and
+may  be scalars  or arrays.  Expressions  can be assigned to 
+variables or can be passed as parameters  to subroutines and
+functions.
+
+Example:
+
+  a = 60 
+  x = exp (sin (a * 3.14159))
+
+1.7 Quickplots
+
+DISGCL  offers several quickplots  which are  collections of
+DISLIN routines that can display data with one command.  For 
+example, the DISGCL command  PLOT  displays  two-dimensional
+curves.
+
+Example:
+
+  x = falloc (100)           
+  plot x, sin (x/5)
+
+Note:  All quickplots  have corresponding  widget interfaces
+       that can be executed with the command
+
+       disgcl   quickplot 
+
+       where quickplot is the name of a quickplot. The widget
+       interfaces for quickplots expect  data in the  form of
+       data files described in chapter 8, 'Data Files'. 

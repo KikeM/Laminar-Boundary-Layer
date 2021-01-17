@@ -1,0 +1,117 @@
+Contents of the DISGCL Manual
+
+1  Overview
+   1.1 Introduction
+   1.2 Syntax of the DISGCL Command
+   1.3 Syntax of DISGCL Script Files
+   1.4 Syntax of Statements
+   1.5 Data Types
+   1.6 Expressions
+   1.7 Quickplots
+
+2  Data Types, Variables
+   2.1 Data Types
+   2.2 Variables
+   2.3 System Variables
+   2.4 Specifying Constants
+   2.5 Arrays
+   2.6 Subscripts
+   2.7 Character Arrays and Strings
+
+3  Expressions and Operators
+   3.1  Operators
+   3.2  Array Operations
+   3.3  Type Conversions
+   3.4  Type Conversion Functions
+
+4  Statements
+   4.1  Identification of Script Files
+   4.2  Comment Lines
+   4.3  Calling DISLIN Routines
+        4.3.1 Calling DISLIN Subroutines
+        4.3.2 Calling DISLIN Functions
+        4.3.3 Passing Parameters to DISLIN Routines
+   4.4  DISGCL Commands
+   4.5  Initializing Arrays with { }
+   4.6  The IF Statement
+   4.7  IF Constructs
+   4.8  SWITCH Statements
+   4.9  The DO Statement
+   4.10 The WHILE Statement
+   4.11 The BREAK Statement
+   4.12 The CONTINUE Statement
+   4.13 The GOTO Statement
+   4.14 Executing System Commands
+
+5  DISGCL Commands
+   5.1  Termination of DISGCL
+   5.2  Getting Help
+   5.3  Including DISGCL Files
+   5.4  Listing Variables
+   5.5  Freeing Variables
+   5.6  The PRINT Command
+   5.7  The PRINTL Command
+   5.8  Logging Commands
+   5.9  Creating Arrays
+
+6  User-defined Subroutines and Functions
+   6.1  Calling User-defined Subroutines
+   6.2  Calling User-defined Functions
+   6.3  The SUBROUTINE Statement
+   6.4  The FUNCTION Statement
+   6.5  The EXTERN Statement
+   6.6  The RETURN Statement
+   6.7  Parameters
+
+7  Quickplots
+   7.1  The PLOT Command
+   7.2  The SCATTR Command
+   7.3  The PLOT3 Command
+   7.4  The PLOT3R Command
+   7.5  The SURF3 Command
+   7.6  The SURFACE Command
+   7.7  The SURSHADE Command
+   7.8  The CONTOUR Command
+   7.9  The CONSHADE Command
+   7.10 Scaling of Quickplots
+   7.11 Quickplot Variables
+
+8  Data Files
+   8.1  Syntax of Data Files
+   8.2  Data File Routines
+   8.3  Example
+
+9  Input and Output
+   9.1  Formatted Output with PRINTF
+   9.2  Formatted Output with SPRINTF
+   9.3  Formatted Input with SCANF
+   9.4  Formatted Input with SSCANF
+   9.5  File Access
+   9.6  Formatted Output to Files
+   9.7  Formatted Input from Files
+   9.8  Text Input and Output Functions
+   9.9  Binary Input and Output Functions
+   9.10 Example
+
+A  Intrinsic Functions
+   A.1  Mathematical Functions
+   A.2  Type Conversion Functions
+   A.3  Complex Functions
+   A.4  Array Functions
+   A.5  Variable and Parameter Functions
+   A.6  Data File Functions
+   A.7  Memory Allocating Functions
+   A.8  String Functions
+   A.9  File Functions
+   A.10 Input and Output Functions
+   A.11 System Functions
+   A.12 Time Functions
+
+B  Examples
+   B.1  Demonstration of CURVE
+   B.2  3-D Colour Plot
+   B.3  Surface Plot
+   B.4  Contour Plot
+   B.5  Shaded Contour Plot
+   B.6  World Coastlines and Lakes
+   B.7  Widgets

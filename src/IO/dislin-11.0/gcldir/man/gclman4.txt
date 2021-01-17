@@ -1,0 +1,364 @@
+                  Chapter 4: Statements 
+             ------------------------------
+
+This chapter  describes  the  statements  that can appear in
+script files, or can be entered at the DISGCL prompt.
+
+4.1 Indentification of Script Files
+
+DISGCL script files must begin with the string  '%GCL' where
+the string can appear in upper or lowercase letters.
+
+Example:    %GCL 
+            PRINT 3 + 4
+
+4.2 Comment Lines
+
+Empty lines and lines beginning with a double slash  (//) or
+a '#' character are interpreted as commend lines.  Lines are
+also allowed to carry trailing  comment fields,  following a
+double slash.
+
+Example: 
+ 
+  %GCL 
+  // This is a comment 
+  PRINT 3 + 4         // This is also a comment
+
+4.3 Callind DISLIN Routines
+
+About 400 DISLIN routines for plotting and parameter setting
+can be executed from DISGCL.  DISLIN routines  can either be
+subroutines that return no value, or functions that return a
+value.
+ 
+4.3.1 Calling DISLIN Subroutines
+
+DISLIN subroutines can be executed with the statement:
+
+routine (list)
+
+where routine is the name of a  DISLIN  routine and list the
+parameters of the routine separated by commas.
+
+Example:
+
+  %GCL 
+  METAFL ('CONS') 
+  DISINI ()   
+  GRAF   (0., 10., 0., 2., 0., 5., 0., 1.) 
+  DISFIN () 
+
+4.3.2 Calling DISLIN Functions
+
+DISLIN functions can be executed with the statement:
+
+v = function (list)
+
+where function is the name of a DISLIN function and list the
+parameters of the function separated by commas.
+
+4.3.3 Passing Parameters to DISLIN Routines
+
+Actual parameters in DISLIN routines can be constants, vari-
+ables and expressions.  Integer constants  must be specified
+without decimal points, floating point constants can be pas-
+sed without decimal points.  Normally, arrays must be passed
+to DISLIN routines as integer or floating point arrays. 
+
+DISGCL checks the number and types of parameters  passed  to
+DISLIN routines. If an error occurs, a warning is printed on
+the screen and the call of the routine will be ignored. 
+
+Example:
+
+  N = TRMLEN (1)
+
+  DISGCL will print the warning:
+
+  >>>> Paramter mismatch
+       User   : TRMLEN (I)
+       Correct: TRMLEN (S)
+
+The abbreviations  in parameter mismatch  warnings  have the
+meaning:
+
+  I   denotes an integer parameter.
+  X   denotes a floating point, integer or double parameter.
+  D   denotes a double parameter.
+  S   denotes a string. 
+  BR  denotes a byte array.
+  IR  denotes an integer array.
+  FR  denotes a floating point array.
+  DR  denotes a double array.
+
+4.4 DISGCL Commands
+ 
+A DISGCL command can be executed with the statement
+
+command [list] 
+
+where command  is the name of  a DISGCL command and list the
+parameters  of the command separated by commas. Several DIS-
+GCL commands are explained in the next chapter.
+
+Example:
+
+  PRINT FALLOC(10) 
+
+4.5 Initializing Arrays with {}
+
+Integer and floating point arrays can be created and initia-
+lized with the statement 
+
+vray = { list } 
+
+where  list is a constant list of integers or floating point
+numbers separated by commas.
+
+Note:   Arrays can also be  created and initialized with the
+        functions FALLOC,  DALLOC  and IALLOC,  and with the
+        DISGCL commands   CHAR,  BYTE,  SHORT,  INT,  FLOAT, 
+        DOUBLE and COMPLEX.
+
+4.6 The IF Statement
+
+The IF statement executes a statement  if a  logical expres-
+sion is true. The syntax is:
+
+IF (expr) statement 
+
+Example:
+
+  IF (I < 10) A = 1
+
+4.7 IF Constructs
+
+IF constructs are statements for decision making. The syntax
+is:
+
+  IF (expression)  
+    statements 
+  ELSE IF (expression) 
+    statements 
+  ELSE 
+    statements 
+  END IF 
+
+If expression is true,  the statements  in the IF block will
+be executed;  if expression is false, control is transferred
+to the next ELSE IF, ELSE or END IF statement. 
+
+Example: 
+
+  IF (A > 0) 
+    ISIGN = 1 
+  ELSE IF (A < 0) 
+    ISIGN = -1 
+  ELSE 
+    ISIGN = 0 
+  END IF
+
+Notes:
+
+ - Up to 8 IF constructs can be nested.
+ - The ELSE IF and ELSE blocks are optional.
+ -  Multiple ELSE IF blocks can be specified.
+
+4.8 SWITCH Statements
+
+The  SWITCH  statement is a  multi-way decision  that  tests
+whether  an expression matches one of the number of constant
+integer values. The syntax is:
+
+  SWITCH (iexpr)  
+    CASE n1:
+      statements
+    CASE n2:
+      statements 
+    ..........
+    DEFAULT:
+      statements 
+  END SWITCH
+
+Each case must be labeled by an INT constant while iexpr can
+be an integer expression. If a case matches iexpr, execution
+starts at that case. The case labeled DEFAULT is executed if
+none of the other cases are satisfied.  The  DEFAULT case is
+optional.
+
+The following  example counts the number  of characters  and
+the number of blanks in a string .
+
+  %GCL 
+  S = 'This is a test' 
+  I = 0 
+  NCHAR = 0 
+  NBLANK = 0 
+  WHILE (S[I] != 0) 
+    SWITCH (S[I])
+      CASE 32:
+        NBLANK = NBLANK + 1
+      DEFAULT:
+        NCHAR = NCHAR + 1
+    END SWITCH
+    I = I + 1
+  END WHILE
+
+  PRINT NCHAR, NBLANK
+
+Notes:
+
+ -  Up to 8 SWITCH statements can be nested.
+ -  The  BREAK  statement  causes  an  immediate exit from a
+    SWITCH statement. 
+
+4.9 The DO Statement
+
+The DO statement can be used to repeat statements a set num-
+ber of times. The syntax is:
+
+  DO v = expr1, expr2 [,expr3] 
+    statements 
+  END DO 
+
+where
+
+  v       is a loop counter.
+  expr1   is an expression that initializes v.
+  expr2   is an expression that defines the end of the  loop
+          range.
+  expr3   is an optional expression  that will be used as an
+          increment  for the loop counter.  The value cannot
+          equal zero. The default value is 1.
+
+The following restrictions apply to DO loops:
+
+ - Up to 8 DO loops can be nested.
+ - Jumping  into  a DO loop  from  outside  its range is not
+   allowed.
+ - Overlapping of DO and IF constructs are not allowed.
+
+Notes:
+
+ - The loop  counter of  a DO loop can be modified by state-
+   ments within the loop.
+ - Whenever possible,  array data should be processed by ar-
+   ray operations  instead  of operations  in a loop.  Array
+   operations are much more faster than loop operations.  
+
+4.10 The WHILE Statement
+
+A  WHILE  loop  repeats as long as a given condition remains
+true. The syntax is:
+
+  WHILE (expr) 
+    statements 
+  END WHILE
+
+Example:
+
+  I = 0
+  SUM = 0
+  WHILE (I < 10)
+    I = I + 1 
+    SUM = SUM + I 
+  END WHILE
+
+The following restrictions apply to WHILE loops:
+
+ - Up to 8 WHILE loops can be nested.
+ - Jumping into a  WHILE  loop from outside its range is not
+   allowed.
+ - Overlapping of WHILE and IF constructs are not allowed.
+
+4.11 The BREAK Statement
+
+The  BREAK statement causes an immediate exit from a SWITCH,
+DO and WHILE construct. 
+
+Example:
+
+  I = 0 
+  WHILE (I < 10) 
+    I = I + 1 
+    PRINT I 
+    IF (I == 3) BREAK 
+  END WHILE
+
+The output of the example is: 
+
+         1 
+         2 
+         3 
+
+Note:
+
+ - The BREAK  statement  ends only the loop  in which it ap-
+   pears.
+
+4.12 The CONTINUE Statement
+
+The  CONTINUE  statement  can be used  to skip all following
+statements  in a loop  and to execute the loop with the next
+iteration.
+
+Example:
+
+  DO I = 1, 5 
+    IF (I == 3) CONTINUE 
+    PRINT I 
+  END DO
+
+The output of the example is: 
+
+        1 
+        2 
+        4 
+        5 
+
+4.13 The GOTO Statement
+
+The  GOTO statement makes a jump to another part of the DIS-
+GCL file. The syntax is: 
+
+GOTO Label 
+
+where  Label  is the name  of a label.  For label names, the
+same rules as for variable names are applied.
+
+The target of the  GOTO  statement must be a label statement
+which has the syntax: 
+
+Label: 
+
+Example:
+
+  I = 0
+  L1: 
+  I = I + 1
+  PRINT I
+  IF (I < 5) GOTO L1
+ 
+The output of the example is: 
+
+         1 
+         2 
+         3 
+         4 
+ 
+4.14 Executing System Commands
+
+System commands can be executed with the statement 
+
+$Command 
+
+where Command is a system command. 
+
+Example: 
+
+  $DIR 
+
+  displays  the files in the current directory if the opera-
+  ting system is MS-DOS or VMS (use $ls for UNIX). 
+

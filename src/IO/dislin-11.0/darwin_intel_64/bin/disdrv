@@ -1,0 +1,6 @@
+#!/bin/sh
+if test $# -eq 0 ; then
+  disdrv_w 
+else
+  disdrv_x "$@"
+fi

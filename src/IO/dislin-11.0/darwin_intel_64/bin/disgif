@@ -1,0 +1,6 @@
+#!/bin/sh
+if test $# -eq 0 ; then
+  disgif_w 
+else
+  disgif_x "$@"
+fi

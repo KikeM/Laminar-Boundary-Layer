@@ -1,0 +1,66 @@
+%GCL
+// Surface Plot
+N = 100
+FLOAT ZMAT[N,N], XRAY[N]
+
+IXRAY = { 200, 1999, 1999, 200}
+IYRAY = {2600, 2600,  801, 801}
+
+PI = 3.1415927
+STEP = 2. * PI / (N - 1)
+
+DO I = 0, N - 1
+  XRAY[I] = SIN (I * STEP)
+END DO
+
+DO J = 0, N - 1
+  ZMAT[*,J] = 2 * XRAY * SIN (J * STEP)
+END DO
+
+METAFL ('CONS')
+SETPAG ('DA4P')
+DISINI ()
+COMPLX ()
+PAGERA ()
+
+AXSPOS (200, 2600)
+AXSLEN (1800, 1800)
+
+NAME   ('X-axis', 'X') 
+NAME   ('Y-axis', 'Y') 
+NAME   ('Z-axis', 'Z') 
+
+TITLIN ('Surface Plot (SURMAT)', 2)
+TITLIN ('F(X,Y) = 2 * SIN(X) * SIN(Y)', 4)
+
+GRAF3D (0.,360.,0.,90.,0.,360.,0.,90.,-3.,3.,-3.,1.)
+HEIGHT (50)
+TITLE  ()
+
+COLOR  ('GREEN')
+SHLSUR ()
+SURMAT (ZMAT, N, N, 1, 1)
+
+// Grid in the XY-plane
+COLOR  ('FORE')
+GRFINI (-1., -1., -1., 1., -1., -1., 1., 1., -1.)
+NOGRAF ()
+GRAF   (0., 360., 0., 90., 0., 360., 0., 90.)
+DASHL  ()
+GRID   (1, 1)
+GRFFIN ()
+
+// Grid in the YZ-plane
+GRFINI (-1., -1., -1., -1., 1., -1., -1., 1., 1.)
+GRAF   (0., 360., 0., 90., -3., 3., -3., 1.)
+GRID   (1, 1)
+GRFFIN ()
+
+// Shading in the XZ-plane
+GRFINI (-1., 1., -1., 1., 1., -1., 1., 1., 1.)
+SHDPAT (7)
+SOLID  ()
+AREAF  (IXRAY, IYRAY, 4)
+GRFFIN ()
+
+DISFIN ()

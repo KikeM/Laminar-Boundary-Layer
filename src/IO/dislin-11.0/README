@@ -1,0 +1,201 @@
+/************************************************************************/
+/**                                                                    **/
+/**                   Darwin Installation of DISLIN                    **/
+/**                                                                    **/
+/** Contents: 1.) Introduction                                         **/
+/**           2.) Installation of the tar.gz Distribution              **/
+/**           3.) Compiling, Linking and Running the Example Programs  **/ 
+/**           4.) Using DISLIN from Perl                               **/
+/**           5.) Using DISLIN from Python                             **/
+/**           6.) Using DISLIN from Java                               **/
+/**           7.) Getting a DISLIN License                             **/
+/**           8.) Web Sites.                                           **/
+/**                                                                    **/
+/** Date   : 15.01.2017                                                **/
+/** Version: 11.0 / Darwin Intel, gcc, g++, g77, g95, gfortran, icc,   **/
+/**                                                      ifort 64-bit  **/
+/** Author : Helmut Michels                                            **/
+/**          MPI fuer Sonnensystemforschung,                           **/
+/**          Justus-von-Liebig-Weg 3, 37077 Goettingen, Germany        **/
+/** Mail:    michels@dislin.de                                         **/
+/************************************************************************/
+
+
+1.) Introduction
+
+   DISLIN is a high level and easy to use graphics library for displaying
+   data as curves,  bar graphs,  pie charts,  3D-colour plots,  surfaces,
+   contours and maps. The software is available for several C, Fortran 77
+   and Fortran 90/95 compilers.
+
+   The UNIX versions of the graphics software  DISLIN  are distributed as 
+   compressed tar files with the file names 'dislin-n.m.xxx.tar.gz' where
+   'n.m' contains the DISLIN version while the part 'xxx'  identifies the 
+   operating system or compiler.  
+
+   Notes: - This distribution of DISLIN supports programming on Intel
+            machines with Mac OSX 10.x. It supports the compilers
+            gcc, g77, g95, gfortran, Intel icc and ifort. The included
+            DISLIN libraries are compiled for 64-bit. 
+
+          - Precompiled 64-bit modules for Perl, Python and Java are 
+            included. 
+
+          - An installtion of OpenMotif is necessary for using DISLIN. A
+            compatible .dmg package of OpenMotif can be downloaded from
+            http://www.ist-inc.com/DOWNLOADS/motif_download.html 
+
+
+2.) Installation of the tar.gz Distribution
+
+You should have root access to install the tar.gz distribution since the
+install program creates some links in /usr/local/lib to the DISLIN libraries.
+
+a) Uncompress the tar.gz file with the command
+
+                  gzip -d     dislin-11.0.darwin.intel.64.tar.gz
+
+
+b) Restore files from the tar file with the command
+
+                  tar   xvf   dislin-11.0.darwin.intel.64.tar    
+
+c) Change to the extraction directory of DISLIN
+
+                  cd    dislin-11.0
+
+d) Choose a directory in the file structure where DISLIN should be
+   installed and define the environment variable DISLIN with it:
+
+                   export DISLIN=$HOME/dislin
+    
+e) Run the install program with the command 
+
+                   ./INSTALL
+
+   This program copies files to $DISLIN and sets protections.
+
+f) To make DISLIN available for general use, write the following com-
+   mands to your .profile or to /etc/profile
+
+                    DISLIN=directory                     
+                    export DISLIN
+                    PATH=${PATH}:${DISLIN}/bin
+
+                    DYLD_LIBRARY_PATH=$DISLIN:$DYLD_LIBRARY_PATH
+                    export DYLD_LIBRARY_PATH
+
+   For a C-shell, you should include the commands
+
+                    setenv DISLIN directory                     
+                    setenv PATH ${PATH}:${DISLIN}/bin
+                    setenv DYLD_LIBRARY_PATH ${DISLIN}:${DYLD_LIBRARY_PATH}
+
+   into your .login file.
+
+g) You can delete the directory 'dislin-11.0.
+
+
+3.) Compiling, Linking and Running the Example Programs
+  
+   Now you can compile, link and run the example programs in the
+   directory $DISLIN/examples with the commands:
+
+                    clink     -a exa_c      (for gcc)       
+                    cpplink   -a exa_cpp    (for g++)       
+                    dlink     -a exa_f77    (for g77)
+                    g95link   -a exa_f90    (for g95)
+                    gf77link  -a exa_f77    (for gfortran, Fortran 77)
+                    gf95link  -a exa_f90    (for gfortran, Fortran 90/95)
+                    iclink    -a exa_c      (for Intel icc)       
+                    if77link  -a exa_f77    (for Intel ifort, Fortran 77)
+                    if90link  -a exa_f90    (for Intel ifort, Fortran 90/95)
+
+   and
+                    clink     -a map_c      (for gcc)       
+                    cpplink   -a map_cpp    (for g++)       
+                    dlink     -a map_f77    (for g77)
+                    g95link   -a map_f90    (for g95)
+                    gf77link  -a map_f77    (for gfortran, Fortran 77)
+                    gf95link  -a map_f90    (for gfortran, Fortran 90/95)
+                    iclink    -a map_c      (for Intel icc)       
+                    if77link  -a map_f77    (for Intel ifort, Fortran 77)
+                    if90link  -a map_f90    (for Intel ifort, Fortran 90/95)
+
+    Note:   If you use a Fortran 90 compiler such as g95, gfortran and ifort,
+            you may have to recompile the file dislin.f90 for getting a
+            compatible dislin.mod file for your compiler version.
+
+
+4.) Using DISLIN from Perl        
+
+   A DISLIN module for the programming language Perl is included in this
+   DISLIN distribution. The module and some examples can be found in the
+   directory $DISLIN/perl
+
+   To use DISLIN from Perl, you have to define the  environment variable
+   PERL5LIB:
+
+             export PERL5LIB=$DISLIN/perl
+
+   Note: The Perl module was created with Perl version 5.11.0. The
+         Source code of the module is included in $DISLIN/perl for
+         re-creating the module if your Perl version is not compatible
+         with the version above.
+
+
+5.) Using DISLIN from Python        
+
+   An extension module for the programming language Python is also 
+   included in  DISLIN for Darwin. The module and examples can be found
+   in the directory $DISLIN/python
+
+   To use DISLIN from Python, you have to define the  environment variable
+   PYTHONPATH:
+
+             export PYTHONPATH=$DISLIN/python
+
+   Note: The module file 'dislinmodule.so' is created with Python version
+         2.6.0. Source code of the Python extension is 
+         included in $DISLIN/python for re-creating the module. 
+
+
+6.) Using DISLIN from Java        
+
+   An interface for the programming language Java is also included in
+   the DISLIN distribution for Mac OSX/Intel. It allows to use DISLIN 
+   routines from Java applications. The interface and examples can be 
+   found in the directory $DISLIN/java. 
+
+   To use DISLIN from Java, you have to define the  environment variable
+   CLASSPATH:
+
+             export CLASSPATH=$DISLIN/java/dislin.jar:.
+   
+   The examples in $DISLIN/java can be compiled and executed with the
+   commands
+
+   javac  example.java
+   java   example 
+
+   Note: The module file disjava-11.0.so is created with Java version
+         1.6.0 Source code of the Java extension is included in 
+         $DISLIN/java for re-creating the module. 
+
+
+7.) Getting a DISLIN License
+
+   DISLIN is free for non-commercial use. Licenses for selling programs
+   linked with DISLIN or for using DISLIN in an environment related to
+   business are available from the site http://www.dislin.de. 
+
+
+8.) Web Sites
+
+   DISLIN is available via ftp anonymous from the following site:
+
+      ftp://ftp.gwdg.de/pub/grafik/dislin 
+
+   The DISLIN home page is:
+
+      http://www.dislin.de

@@ -1,0 +1,299 @@
+ #!/bin/sh
+echo ""
+echo "     /*****************************************************************/"
+echo "     /**                       I N S T A L L                         **/"
+echo "     /**                                                             **/"
+echo "     /** This program installs the graphics software DISLIN. The va- **/"
+echo "     /** riable  DISLIN must be set to  the directory  where  DISLIN **/"
+echo "     /** should be installed:                                        **/"
+echo "     /** For example:  export DISLIN $HOME/dislin                    **/"
+echo "     /**                                                             **/"
+echo "     /** Date   : 15.01.2017                                         **/"
+echo "     /** Version: 11.0 / Darwin, Intel, 64-bit                       **/"
+echo "     /*****************************************************************/"
+echo ""
+
+if test $DISLIN ; then
+  echo "Installation of DISLIN in directory "${DISLIN}
+  echo ""
+else
+  echo "The environment DISLIN is not defined!"
+  exit 0
+fi 
+
+if test ! -d $DISLIN; then 
+  mkdir $DISLIN 
+  echo "The directory  "${DISLIN}"      is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}
+
+if test ! -d $DISLIN/map; then 
+  mkdir $DISLIN/map 
+  echo "The directory  "${DISLIN}"/map  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/map
+
+if test ! -d $DISLIN/man; then 
+  mkdir $DISLIN/man 
+  echo "The directory  "${DISLIN}"/man  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/man
+
+if test ! -d $DISLIN/hlp; then 
+  mkdir $DISLIN/hlp 
+  echo "The directory  "${DISLIN}"/hlp  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/hlp
+
+if test ! -d $DISLIN/fonts; then 
+  mkdir $DISLIN/fonts 
+  echo "The directory  "${DISLIN}"/fonts  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/fonts
+
+if test ! -d $DISLIN/bin; then 
+  mkdir $DISLIN/bin 
+  echo "The directory  "${DISLIN}"/bin  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin
+
+if test ! -d $DISLIN/real64; then 
+  mkdir $DISLIN/real64 
+  echo "The directory  "${DISLIN}"/real64 is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/real64
+
+if test ! -d $DISLIN/lib; then 
+  mkdir $DISLIN/lib 
+  echo "The directory  "${DISLIN}"/lib  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/lib
+
+if test ! -d $DISLIN/examples; then 
+  mkdir $DISLIN/examples
+  echo "The directory  "${DISLIN}"/examples  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/examples
+
+if test ! -d $DISLIN/g95; then 
+  mkdir $DISLIN/g95
+  echo "The directory  "${DISLIN}"/g95  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/g95
+
+if test ! -d $DISLIN/g95/real64; then 
+  mkdir $DISLIN/g95/real64
+  echo "The directory  "${DISLIN}"/g95/real64  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/g95/real64
+
+if test ! -d $DISLIN/gf; then 
+  mkdir $DISLIN/gf
+  echo "The directory  "${DISLIN}"/gf  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/gf
+
+if test ! -d $DISLIN/gf/real64; then 
+  mkdir $DISLIN/gf/real64
+  echo "The directory  "${DISLIN}"/gf/real64  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/gf/real64
+
+if test ! -d $DISLIN/ifc; then 
+  mkdir $DISLIN/ifc
+  echo "The directory  "${DISLIN}"/ifc  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/ifc
+
+if test ! -d $DISLIN/ifc/real64; then 
+  mkdir $DISLIN/ifc/real64
+  echo "The directory  "${DISLIN}"/ifc/real64  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/ifc/real64
+
+if test ! -d $DISLIN/gcldir; then 
+  mkdir $DISLIN/gcldir 
+  echo "The directory  "${DISLIN}"/gcldir  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/gcldir
+
+if test ! -d $DISLIN/python; then 
+  mkdir $DISLIN/python 
+  echo "The directory  "${DISLIN}"/python  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/python
+
+if test ! -d $DISLIN/perl; then 
+  mkdir $DISLIN/perl 
+  echo "The directory  "${DISLIN}"/perl  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/perl
+
+if test ! -d $DISLIN/java; then 
+  mkdir $DISLIN/java 
+  echo "The directory  "${DISLIN}"/java  is created!"
+fi
+chmod u=rwx,g=rx,o=rx ${DISLIN}/java
+
+cp -p man/*.txt ${DISLIN}/man
+echo "man/*         is copied to  "${DISLIN}"/man"
+cp -p gcldir/man/*    ${DISLIN}/man
+echo "gcldir/man/*  is copied to  "${DISLIN}"/man"
+chmod u=rw,g=r,o=r ${DISLIN}/man/*
+
+cp -p hlp/*.txt ${DISLIN}/hlp
+echo "hlp/*         is copied to  "${DISLIN}"/hlp"
+cp -p gcldir/hlp/*    ${DISLIN}/hlp
+echo "gcldir/hlp/*  is copied to  "${DISLIN}"/hlp"
+chmod u=rw,g=r,o=r ${DISLIN}/hlp/*
+
+cp -p fonts/*.bdf ${DISLIN}/fonts
+echo "fonts/*      is copied to  "${DISLIN}"/fonts"
+chmod u=rw,g=r,o=r ${DISLIN}/fonts/*
+
+cp -p gcldir/*.gcl ${DISLIN}/gcldir
+cp -p gcldir/*.ini ${DISLIN}/gcldir
+chmod u=rw,g=r,o=r ${DISLIN}/gcldir/*
+echo "gcldir/*.gcl  is copied to  "${DISLIN}"/gcldir"
+
+cp -p python/*  ${DISLIN}/python
+echo "python/*      is copied to  "${DISLIN}"/python"
+chmod u=rwx,g=rx,o=rx ${DISLIN}/python/*.py
+
+cp -p perl/*  ${DISLIN}/perl
+echo "perl/*        is copied to  "${DISLIN}"/perl"
+chmod u=rwx,g=rx,o=rx ${DISLIN}/perl/*
+chmod u=rw,g=r,o=r  ${DISLIN}/perl/Dislin.pm
+
+cp -p java/*  ${DISLIN}/java
+echo "java/*        is copied to  "${DISLIN}"/java"
+chmod u=rwx,g=r,o=r ${DISLIN}/java/*
+
+cp -p darwin_intel_64/bin/*        ${DISLIN}/bin
+echo "darwin_intel_64/bin  is copied to  "${DISLIN}/"bin"
+   
+chmod u=rwx,g=x,o=x ${DISLIN}/bin/*
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/disaps
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/disbmp
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/disdrv
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/disgif
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/disimg
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/dismov
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/dispng
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/distif
+
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/dlink
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/clink
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/g95link
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/gf77link
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/gf95link
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/iclink
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/if77link
+chmod u=rwx,g=rx,o=rx ${DISLIN}/bin/if90link
+
+cp -p darwin_intel_64/lib/*        ${DISLIN}/lib
+echo "darwin_intel_64/lib  is copied to  "${DISLIN}/"lib"
+   
+chmod u=rwx,g=rx,o=rx ${DISLIN}/lib/*
+
+cp -p darwin_intel_64/g95/dislin.mod    ${DISLIN}/g95
+cp -p darwin_intel_64/g95/dislin_d.mod  ${DISLIN}/g95/real64/dislin.mod
+chmod u=rw,g=r,o=r ${DISLIN}/g95/dislin.mod
+chmod u=rw,g=r,o=r ${DISLIN}/g95/real64/dislin.mod
+cp -p darwin_intel_64/gf/dislin.mod    ${DISLIN}/gf
+cp -p darwin_intel_64/gf/dislin_d.mod  ${DISLIN}/gf/real64/dislin.mod
+chmod u=rw,g=r,o=r ${DISLIN}/gf/dislin.mod
+chmod u=rw,g=r,o=r ${DISLIN}/gf/real64/dislin.mod
+cp -p darwin_intel_64/ifc/dislin.mod    ${DISLIN}/ifc
+cp -p darwin_intel_64/ifc/dislin_d.mod  ${DISLIN}/ifc/real64/dislin.mod
+chmod u=rw,g=r,o=r ${DISLIN}/ifc/dislin.mod
+chmod u=rw,g=r,o=r ${DISLIN}/ifc/real64/dislin.mod
+
+cp -p darwin_intel_64/perl/*     ${DISLIN}/perl
+chmod u=rwx,g=rx,o=rx ${DISLIN}/perl/*.bundle
+
+cp -p darwin_intel_64/python/*   ${DISLIN}/python
+chmod u=rwx,g=rx,o=rx ${DISLIN}/python/*.so
+
+cp -p darwin_intel_64/java/*     ${DISLIN}/java
+chmod u=rwx,g=rx,o=rx ${DISLIN}/java/*.so
+
+cp -p darwin_intel_64/dislin.f90   ${DISLIN}/g95/dislin.f90
+echo "dislin.f90    is copied to  "${DISLIN}/g95
+chmod u=rwx,g=r,o=r ${DISLIN}/g95/dislin.f90
+
+cp -p darwin_intel_64/dislin_d.f90   ${DISLIN}/g95/real64/dislin.f90
+echo "dislin_d.f90  is copied to  "${DISLIN}/g95/real64
+chmod u=rwx,g=r,o=r ${DISLIN}/g95/real64/dislin.f90
+
+cp -p darwin_intel_64/dislin.f90   ${DISLIN}/gf/dislin.f90
+echo "dislin.f90    is copied to  "${DISLIN}/gf
+chmod u=rwx,g=r,o=r ${DISLIN}/gf/dislin.f90
+
+cp -p darwin_intel_64/dislin_d.f90   ${DISLIN}/gf/real64/dislin.f90
+echo "dislin_d.f90  is copied to  "${DISLIN}/gf/real64
+chmod u=rwx,g=r,o=r ${DISLIN}/gf/real64/dislin.f90
+
+cp -p darwin_intel_64/dislin.f90   ${DISLIN}/ifc/dislin.f90
+echo "dislin.f90    is copied to  "${DISLIN}/ifc
+chmod u=rwx,g=r,o=r ${DISLIN}/ifc/dislin.f90
+
+cp -p darwin_intel_64/dislin_d.f90   ${DISLIN}/ifc/real64/dislin.f90
+echo "dislin_d.f90  is copied to  "${DISLIN}/ifc/real64
+chmod u=rwx,g=r,o=r ${DISLIN}/ifc/real64/dislin.f90
+
+if test ! -f $DISLIN/dislin.log ; then  
+  cp -p dislin.log ${DISLIN}
+  chmod u=rw,g=rw,o=rw ${DISLIN}/dislin.log
+  echo "dislin.log    is copied to  "${DISLIN}
+fi
+
+cp -p map/* ${DISLIN}/map
+chmod u=rw,g=r,o=r ${DISLIN}/map/*
+echo "map/*         is copied to  "${DISLIN}"/map"
+
+cp -p README ${DISLIN}
+chmod u=rw ${DISLIN}/README
+echo "README        is copied to  "${DISLIN}
+
+cp -p DISLIN ${DISLIN}
+chmod u=rw,g=r,o=r ${DISLIN}/DISLIN
+echo "DISLIN        is copied to  "${DISLIN}
+
+cp -p license.txt ${DISLIN}
+chmod u=rw,g=r,o=r ${DISLIN}/license.txt
+echo "license.txt   is copied to  "${DISLIN}
+
+cp -p examples/dislin.h  ${DISLIN}
+cp -p examples/discpp.h  ${DISLIN}
+cp -p examples/dislin_d.h  ${DISLIN}/real64/dislin.h
+cp -p examples/exa_c.c   ${DISLIN}/examples
+cp -p examples/exa_cpp.cpp   ${DISLIN}/examples
+cp -p examples/exa_f77.f ${DISLIN}/examples
+cp -p examples/exa_f90.f90 ${DISLIN}/examples/exa_f90.f90
+cp -p examples/map_c.c   ${DISLIN}/examples
+cp -p examples/map_cpp.cpp   ${DISLIN}/examples
+cp -p examples/map_f77.f ${DISLIN}/examples
+cp -p examples/map_f90.f90 ${DISLIN}/examples/map_f90.f90
+echo "examples/*    is copied to  "${DISLIN}"/examples"
+chmod u=rw,g=r,o=r ${DISLIN}/examples/*
+chmod u=rw,g=r,o=r ${DISLIN}/dislin.h
+chmod u=rw,g=r,o=r ${DISLIN}/discpp.h
+chmod u=rw,g=r,o=r ${DISLIN}/real64/dislin.h
+
+ln -s -f ${DISLIN}/lib/libdislin.11.0.0.dylib ${DISLIN}/libdislin.11.dylib
+ln -s -f ${DISLIN}/lib/libdislin.11.0.0.dylib ${DISLIN}/libdislin.10.dylib
+ln -s -f ${DISLIN}/lib/libdislin.11.0.0.dylib ${DISLIN}/libdislin.dylib
+
+ln -s -f ${DISLIN}/lib/libdislin_d.11.0.0.dylib ${DISLIN}/libdislin_d.11.dylib
+ln -s -f ${DISLIN}/lib/libdislin_d.11.0.0.dylib ${DISLIN}/libdislin_d.10.dylib
+ln -s -f ${DISLIN}/lib/libdislin_d.11.0.0.dylib ${DISLIN}/libdislin_d.dylib
+
+ln -s -f ${DISLIN}/lib/libdiscpp.11.0.0.dylib ${DISLIN}/libdiscpp.11.dylib
+ln -s -f ${DISLIN}/lib/libdiscpp.11.0.0.dylib ${DISLIN}/libdiscpp.dylib
+
+ln -s -f ${DISLIN}/java/disjava-11.0.so ${DISLIN}/libdisjava.dylib
+
+echo "links were created in "$DISLIN
+
+

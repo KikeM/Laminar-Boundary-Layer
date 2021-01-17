@@ -1,0 +1,33 @@
+%GCL
+// Widgets
+ 
+CL1  = 'Item1|Item2|Item3|Item4|Item5'
+CFIL = ' '
+
+SWGTIT ('Example')
+IP = WGINI ('VERT')
+ID_LAB = WGLAB (IP, 'File Widget: ')
+ID_FIL = WGFIL (IP, 'Open File', CFIL, '*.c')
+
+ID_LAB = WGLAB (IP, 'List Widget: ')
+ID_LIS = WGLIS (IP, CL1, 1)
+
+ID_LAB = WGLAB (IP, 'Button Widgets')
+ID_BT1 = WGBUT (IP, 'This is Button 1', 0)
+ID_BT2 = WGBUT (IP, 'This is Button 2', 1)
+
+ID_LAB = WGLAB (IP, 'Scale Widget')
+ID_SCL = WGSCL (IP, ' ', 0., 10., 5., 1)
+
+ID_OK  = WGOK  (IP)
+WGFIN ()
+
+CFIL = GWGFIL (ID_FIL)
+ILIS = GWGLIS (ID_LIS)
+IBT1 = GWGBUT (ID_BT1)
+IBT2 = GWGBUT (ID_BT2)
+XSCL = GWGSCL (ID_SCL)
+
+FREE IP, CL1, ID_LAB, ID_OK, ID_FIL, ID_LIS, ID_BT1 @
+     ID_BT2, ID_SCL
+LIST
